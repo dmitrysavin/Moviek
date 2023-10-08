@@ -10,8 +10,8 @@ import SwiftUI
 @main
 struct MoviekApp: App {
     
-    let appDIContainer = AppDIContainer()
-    var appFlowCoordinator: AppFlowCoordinator?
+    private let appDIContainer = AppDIContainer()
+    private var appFlowCoordinator: AppFlowCoordinator?
 
     init() {
         appFlowCoordinator = AppFlowCoordinator(appDIContainer: appDIContainer)

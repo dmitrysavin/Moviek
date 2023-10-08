@@ -22,8 +22,5 @@ struct MoviesQueriesView<VM: MoviesQueriesVM>: View {
                 }
             }
         }
-//        .onAppear {
-//            viewModel.updateMoviesQueries()
-//        }
     }
 }
