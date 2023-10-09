@@ -11,7 +11,7 @@ import SwiftUI
 struct MoviekApp: App {
     
     private let appDIContainer = AppDIContainer()
-    private var appFlowCoordinator: AppFlowCoordinator?
+    private var appFlowCoordinator: AppFlowCoordinator
 
     init() {
         appFlowCoordinator = AppFlowCoordinator(appDIContainer: appDIContainer)
@@ -19,7 +19,7 @@ struct MoviekApp: App {
     
     var body: some Scene {
         WindowGroup {
-            appFlowCoordinator?.start()
+            appFlowCoordinator.start()
         }
     }
 }
