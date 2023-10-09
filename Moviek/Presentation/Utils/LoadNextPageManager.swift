@@ -1,7 +1,7 @@
 
 import Foundation
 
-class LoadNextPageCoordinator {
+class LoadNextPageManager {
     private var currentPage: Int = 0
     private var totalPageCount: Int = 1
     

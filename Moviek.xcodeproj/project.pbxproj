@@ -22,7 +22,7 @@
 		C27C67BD2AC5445C00491C7E /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27C67BC2AC5445C00491C7E /* NetworkConfig.swift */; };
 		C27C67C02AC5451300491C7E /* RepositoryTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27C67BF2AC5451300491C7E /* RepositoryTask.swift */; };
 		C27C67C52AC554CB00491C7E /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27C67C42AC554CB00491C7E /* LoadingView.swift */; };
-		C2CC9ADF2AC66E0A000490EE /* LoadNextPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC9ADE2AC66E0A000490EE /* LoadNextPageCoordinator.swift */; };
+		C2CC9ADF2AC66E0A000490EE /* LoadNextPageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC9ADE2AC66E0A000490EE /* LoadNextPageManager.swift */; };
 		C2CC9AE12AC676EB000490EE /* LoadMoreFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC9AE02AC676EB000490EE /* LoadMoreFooter.swift */; };
 		C2CC9AE32AC69804000490EE /* ViewModelLoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC9AE22AC69804000490EE /* ViewModelLoadingState.swift */; };
 		C2CC9AE52AC7A9DF000490EE /* PosterImagesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC9AE42AC7A9DF000490EE /* PosterImagesRepository.swift */; };
@@ -96,7 +96,7 @@
 		C27C67BF2AC5451300491C7E /* RepositoryTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTask.swift; sourceTree = "<group>"; };
 		C27C67C12AC5494A00491C7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C27C67C42AC554CB00491C7E /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		C2CC9ADE2AC66E0A000490EE /* LoadNextPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNextPageCoordinator.swift; sourceTree = "<group>"; };
+		C2CC9ADE2AC66E0A000490EE /* LoadNextPageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNextPageManager.swift; sourceTree = "<group>"; };
 		C2CC9AE02AC676EB000490EE /* LoadMoreFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreFooter.swift; sourceTree = "<group>"; };
 		C2CC9AE22AC69804000490EE /* ViewModelLoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelLoadingState.swift; sourceTree = "<group>"; };
 		C2CC9AE42AC7A9DF000490EE /* PosterImagesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterImagesRepository.swift; sourceTree = "<group>"; };
@@ -277,7 +277,7 @@
 		C27C67C32AC554C000491C7E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				C2CC9ADE2AC66E0A000490EE /* LoadNextPageCoordinator.swift */,
+				C2CC9ADE2AC66E0A000490EE /* LoadNextPageManager.swift */,
 				C27C67C42AC554CB00491C7E /* LoadingView.swift */,
 				C2F65FCA2ACB55B500156C10 /* NoResultsView.swift */,
 				C2CC9AE02AC676EB000490EE /* LoadMoreFooter.swift */,
@@ -443,9 +443,9 @@
 		C2FA5F5C2AC2A2130002F85A /* MoviesScene */ = {
 			isa = PBXGroup;
 			children = (
+				C2FA5F5D2AC2A2610002F85A /* MoviesSearch */,
 				C2F65FCC2ACB6DFA00156C10 /* MoviesQueries */,
 				C2CC9AF12AC91E7F000490EE /* MovieDetails */,
-				C2FA5F5D2AC2A2610002F85A /* MoviesSearch */,
 			);
 			path = MoviesScene;
 			sourceTree = "<group>";
@@ -644,7 +644,7 @@
 				C2FA5F582AC29FEA0002F85A /* MoviesSceneBuilder.swift in Sources */,
 				C27C67C02AC5451300491C7E /* RepositoryTask.swift in Sources */,
 				C2FA5F5A2AC2A0800002F85A /* AppFlowCoordinator.swift in Sources */,
-				C2CC9ADF2AC66E0A000490EE /* LoadNextPageCoordinator.swift in Sources */,
+				C2CC9ADF2AC66E0A000490EE /* LoadNextPageManager.swift in Sources */,
 				C27C67AD2AC52C8600491C7E /* MoviesRequestDTO+Mapping.swift in Sources */,
 				C27C67BD2AC5445C00491C7E /* NetworkConfig.swift in Sources */,
 				C2CC9AE52AC7A9DF000490EE /* PosterImagesRepository.swift in Sources */,

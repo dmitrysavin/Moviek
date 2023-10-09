@@ -47,7 +47,7 @@ final class DefaultMoviesVM: MoviesSearchVM {
     private let searchMoviesUseCase: SearchMoviesUseCase
     private var pages: [MoviesPage] = []
     private let mainQueue: DispatchQueueType
-    private let loadNextPageCoordinator: LoadNextPageCoordinator
+    private let loadNextPageManager: LoadNextPageManager
     private let posterImagesRepository: PosterImagesRepository
     private var moviesLoadTask: Cancellable? { willSet { moviesLoadTask?.cancel() } }
     
@@ -61,7 +61,7 @@ final class DefaultMoviesVM: MoviesSearchVM {
     ) {
         self.searchMoviesUseCase = searchMoviesUseCase
         self.posterImagesRepository = posterImagesRepository
-        self.loadNextPageCoordinator = LoadNextPageCoordinator(currentPage: 0, totalPageCount: 1)
+        self.loadNextPageManager = LoadNextPageManager(currentPage: 0, totalPageCount: 1)
         self.moviesQueriesVM = moviesQueriesVM
         self.sceneBuilder = moviesSceneBuilder
         self.mainQueue = mainQueue
@@ -81,7 +81,7 @@ final class DefaultMoviesVM: MoviesSearchVM {
     }
     
     func didLoadNextPage() {
-        guard loadNextPageCoordinator.hasNextPage,
+        guard loadNextPageManager.hasNextPage,
                 loadingState == .none
         else { return }
         
@@ -100,7 +100,7 @@ final class DefaultMoviesVM: MoviesSearchVM {
     private func resetSearch(forText searchText: String) {
         pages.removeAll()
         items.removeAll()
-        loadNextPageCoordinator.update(currentPage: 0, totalPageCount: 1)
+        loadNextPageManager.update(currentPage: 0, totalPageCount: 1)
         
         guard !searchText.isEmpty else { return }
 
@@ -113,7 +113,7 @@ final class DefaultMoviesVM: MoviesSearchVM {
         
         let requestValue = SearchMoviesUseCaseRequestValue(
             searchText: searchText,
-            page: loadNextPageCoordinator.nextPage
+            page: loadNextPageManager.nextPage
         )
         
         moviesLoadTask = searchMoviesUseCase.execute(
@@ -131,7 +131,7 @@ final class DefaultMoviesVM: MoviesSearchVM {
     }
 
     private func appendPage(_ moviesPage: MoviesPage) {
-        loadNextPageCoordinator.update(
+        loadNextPageManager.update(
             currentPage: moviesPage.page,
             totalPageCount: moviesPage.totalPages
         )
