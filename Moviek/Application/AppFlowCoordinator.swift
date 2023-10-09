@@ -5,7 +5,7 @@ final class AppFlowCoordinator {
 
     private let appDIContainer: AppDIContainer
     
-    private var moviesSceneDIContainer: MoviesSceneDIContainer?
+    private var moviesSceneDIContainer: MoviesSceneBuilder?
     
     init(appDIContainer: AppDIContainer) {
         self.appDIContainer = appDIContainer

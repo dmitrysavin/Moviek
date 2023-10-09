@@ -50,7 +50,7 @@
 		C2FA5F452AC268720002F85A /* MoviekUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FA5F442AC268720002F85A /* MoviekUITests.swift */; };
 		C2FA5F472AC268720002F85A /* MoviekUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FA5F462AC268720002F85A /* MoviekUITestsLaunchTests.swift */; };
 		C2FA5F562AC29F9C0002F85A /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FA5F552AC29F9C0002F85A /* AppDIContainer.swift */; };
-		C2FA5F582AC29FEA0002F85A /* MoviesSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FA5F572AC29FEA0002F85A /* MoviesSceneDIContainer.swift */; };
+		C2FA5F582AC29FEA0002F85A /* MoviesSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FA5F572AC29FEA0002F85A /* MoviesSceneBuilder.swift */; };
 		C2FA5F5A2AC2A0800002F85A /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FA5F592AC2A0800002F85A /* AppFlowCoordinator.swift */; };
 		C2FA5F5F2AC2A2750002F85A /* MoviesSearchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FA5F5E2AC2A2750002F85A /* MoviesSearchScreen.swift */; };
 		C2FA5F632AC2A6810002F85A /* MoviesSearchVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FA5F622AC2A6810002F85A /* MoviesSearchVM.swift */; };
@@ -125,7 +125,7 @@
 		C2FA5F442AC268720002F85A /* MoviekUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviekUITests.swift; sourceTree = "<group>"; };
 		C2FA5F462AC268720002F85A /* MoviekUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviekUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C2FA5F552AC29F9C0002F85A /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
-		C2FA5F572AC29FEA0002F85A /* MoviesSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesSceneDIContainer.swift; sourceTree = "<group>"; };
+		C2FA5F572AC29FEA0002F85A /* MoviesSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesSceneBuilder.swift; sourceTree = "<group>"; };
 		C2FA5F592AC2A0800002F85A /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		C2FA5F5E2AC2A2750002F85A /* MoviesSearchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesSearchScreen.swift; sourceTree = "<group>"; };
 		C2FA5F622AC2A6810002F85A /* MoviesSearchVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesSearchVM.swift; sourceTree = "<group>"; };
@@ -447,7 +447,7 @@
 			isa = PBXGroup;
 			children = (
 				C2FA5F552AC29F9C0002F85A /* AppDIContainer.swift */,
-				C2FA5F572AC29FEA0002F85A /* MoviesSceneDIContainer.swift */,
+				C2FA5F572AC29FEA0002F85A /* MoviesSceneBuilder.swift */,
 			);
 			path = DIContainers;
 			sourceTree = "<group>";
@@ -678,7 +678,7 @@
 				C2F65FD42ACB712600156C10 /* MoviesQueryCellVM.swift in Sources */,
 				C2CC9AE32AC69804000490EE /* ViewModelLoadingState.swift in Sources */,
 				C2CC9AE12AC676EB000490EE /* LoadMoreFooter.swift in Sources */,
-				C2FA5F582AC29FEA0002F85A /* MoviesSceneDIContainer.swift in Sources */,
+				C2FA5F582AC29FEA0002F85A /* MoviesSceneBuilder.swift in Sources */,
 				C27C67C02AC5451300491C7E /* RepositoryTask.swift in Sources */,
 				C2FA5F5A2AC2A0800002F85A /* AppFlowCoordinator.swift in Sources */,
 				C2CC9ADF2AC66E0A000490EE /* LoadNextPageCoordinator.swift in Sources */,

@@ -32,11 +32,11 @@ final class AppDIContainer {
     
     // MARK: - DIContainers of scenes
     
-    func makeMoviesSceneDIContainer() -> MoviesSceneDIContainer {
-        let dependencies = MoviesSceneDIContainer.Dependencies(
+    func makeMoviesSceneDIContainer() -> MoviesSceneBuilder {
+        let dependencies = MoviesSceneBuilder.Dependencies(
             apiDataTransferService: apiDataTransferService,
             imagesBasePath: appConfiguration.imagesBaseURL
         )
-        return MoviesSceneDIContainer(dependencies: dependencies)
+        return MoviesSceneBuilder(dependencies: dependencies)
     }
 }
