@@ -28,6 +28,7 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
                     MoviesQueriesView(viewModel: moviesQueriesVM) { selectedQueryVM in
                         searchText = selectedQueryVM.query
                         viewModel.didSearch(text: searchText)
+                        hideKeyboard()
                     }
                 } else {
                     MoviesSearchResultView(viewModel: viewModel)
