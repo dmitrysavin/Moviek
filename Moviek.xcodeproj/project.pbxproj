@@ -30,7 +30,7 @@
 		C2CC9AF02AC7F22F000490EE /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C2CC9AEF2AC7F22F000490EE /* Kingfisher */; };
 		C2CC9AF32AC91EA4000490EE /* MovieDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC9AF22AC91EA4000490EE /* MovieDetailsScreen.swift */; };
 		C2CC9AF72AC91F35000490EE /* MovieDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC9AF62AC91F35000490EE /* MovieDetailsVM.swift */; };
-		C2CC9AF92AC95D34000490EE /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC9AF82AC95D34000490EE /* DateFormatter.swift */; };
+		C2CC9AF92AC95D34000490EE /* DateFormatter+DisplayFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC9AF82AC95D34000490EE /* DateFormatter+DisplayFormatter.swift */; };
 		C2E6131D2ACE074D0082E642 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E6131C2ACE074D0082E642 /* KeyboardManager.swift */; };
 		C2E6131F2ACE14DA0082E642 /* MovieQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E6131E2ACE14DA0082E642 /* MovieQuery.swift */; };
 		C2E613212ACE15010082E642 /* MoviesQueriesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E613202ACE15010082E642 /* MoviesQueriesUseCase.swift */; };
@@ -103,7 +103,7 @@
 		C2CC9AE62AC7AA1F000490EE /* DefaultPosterImagesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPosterImagesRepository.swift; sourceTree = "<group>"; };
 		C2CC9AF22AC91EA4000490EE /* MovieDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsScreen.swift; sourceTree = "<group>"; };
 		C2CC9AF62AC91F35000490EE /* MovieDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsVM.swift; sourceTree = "<group>"; };
-		C2CC9AF82AC95D34000490EE /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		C2CC9AF82AC95D34000490EE /* DateFormatter+DisplayFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+DisplayFormatter.swift"; sourceTree = "<group>"; };
 		C2E6131C2ACE074D0082E642 /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 		C2E6131E2ACE14DA0082E642 /* MovieQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieQuery.swift; sourceTree = "<group>"; };
 		C2E613202ACE15010082E642 /* MoviesQueriesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesQueriesUseCase.swift; sourceTree = "<group>"; };
@@ -168,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				C21665C92AD3B06000F15016 /* View+HideKeyboard.swift */,
+				C2CC9AF82AC95D34000490EE /* DateFormatter+DisplayFormatter.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -266,7 +267,6 @@
 				C2F65FCA2ACB55B500156C10 /* NoResultsView.swift */,
 				C2CC9AE02AC676EB000490EE /* LoadMoreFooter.swift */,
 				C2CC9AE22AC69804000490EE /* ViewModelLoadingState.swift */,
-				C2CC9AF82AC95D34000490EE /* DateFormatter.swift */,
 				C2E6131C2ACE074D0082E642 /* KeyboardManager.swift */,
 			);
 			path = Utils;
@@ -649,7 +649,7 @@
 				C2FA5F5F2AC2A2750002F85A /* MoviesSearchScreen.swift in Sources */,
 				C2FA5F692AC2A8630002F85A /* Movie.swift in Sources */,
 				C21665CA2AD3B06000F15016 /* View+HideKeyboard.swift in Sources */,
-				C2CC9AF92AC95D34000490EE /* DateFormatter.swift in Sources */,
+				C2CC9AF92AC95D34000490EE /* DateFormatter+DisplayFormatter.swift in Sources */,
 				C2CC9AE72AC7AA1F000490EE /* DefaultPosterImagesRepository.swift in Sources */,
 				C27C67B12AC5437800491C7E /* AppConfiguration.swift in Sources */,
 				C2CC9AF32AC91EA4000490EE /* MovieDetailsScreen.swift in Sources */,

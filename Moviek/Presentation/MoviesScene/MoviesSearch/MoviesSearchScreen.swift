@@ -4,10 +4,9 @@ import SwiftUI
 struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
     
     @ObservedObject private var viewModel: VM
+    @ObservedObject private var keyboardManager = KeyboardManager()
     @State private var showAlert = false
     @State private var searchText: String = ""
-  
-    @ObservedObject private var keyboardManager = KeyboardManager()
     
     
     init(viewModel: VM) {

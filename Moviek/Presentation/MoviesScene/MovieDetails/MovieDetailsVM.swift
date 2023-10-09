@@ -48,7 +48,7 @@ final class DefaultMovieDetailsVM: MovieDetailsVM {
         self.overview = movie.overview ?? ""
 
         if let releaseDate = movie.releaseDate {
-            self.releaseDate = displayDateFormatter.string(from: releaseDate)
+            self.releaseDate = DateFormatter.displayFormatter.string(from: releaseDate)
         } else {
             self.releaseDate = nil
         }
