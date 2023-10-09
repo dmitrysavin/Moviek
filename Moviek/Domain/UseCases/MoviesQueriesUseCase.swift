@@ -12,7 +12,7 @@ protocol MoviesQueriesUseCase {
     ) -> Cancellable?
 }
 
-final class DefaultMoviesQueriesUseCase: MoviesQueriesUseCase {
+struct DefaultMoviesQueriesUseCase: MoviesQueriesUseCase {
 
     private let moviesQueriesRepository: MoviesQueriesRepository
 
