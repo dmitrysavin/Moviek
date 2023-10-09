@@ -2,6 +2,11 @@
 import Foundation
 import SwiftUI
 
+protocol MoviesSearchVMSceneBuilder {
+    associatedtype MovieDetailsVMType: MovieDetailsVM
+    func makeMovieDetailsScreen(movie: Movie) -> MovieDetailsScreen<MovieDetailsVMType>
+}
+
 protocol MoviesVMInput {
     associatedtype MovieDetailsVMType: MovieDetailsVM
     
@@ -27,12 +32,8 @@ protocol MoviesSearchVM: MoviesVMInput & MoviesVMOutput & ObservableObject {
 }
 
 final class DefaultMoviesVM: MoviesSearchVM {
-    
-    struct ScreenBuilder {
-        let movieDetails: (Movie) -> MovieDetailsScreen<DefaultMovieDetailsVM>
-    }
-    
-    let screenBuilder: DefaultMoviesVM.ScreenBuilder
+
+    private let sceneBuilder: MoviesSceneBuilder
     
     @Published var items: [MovieCellVM] = []
     @Published var searchText: String = ""
@@ -53,17 +54,17 @@ final class DefaultMoviesVM: MoviesSearchVM {
     
     
     init(
-        screenBuilder: DefaultMoviesVM.ScreenBuilder,
         searchMoviesUseCase: SearchMoviesUseCase,
         posterImagesRepository: PosterImagesRepository,
         moviesQueriesVM: DefaultMoviesQueriesVM,
+        moviesSceneBuilder: MoviesSceneBuilder,
         mainQueue: DispatchQueueType = DispatchQueue.main
     ) {
-        self.screenBuilder = screenBuilder
         self.searchMoviesUseCase = searchMoviesUseCase
         self.posterImagesRepository = posterImagesRepository
         self.loadNextPageCoordinator = LoadNextPageCoordinator(currentPage: 0, totalPageCount: 1)
         self.moviesQueriesVM = moviesQueriesVM
+        self.sceneBuilder = moviesSceneBuilder
         self.mainQueue = mainQueue
     }
     
@@ -88,7 +89,7 @@ final class DefaultMoviesVM: MoviesSearchVM {
     
     func didSelectItem(at index: Int) -> MovieDetailsScreen<DefaultMovieDetailsVM> {
         let movie = pages.movies[index]
-        return screenBuilder.movieDetails(movie)
+        return sceneBuilder.makeMovieDetailsScreen(movie: movie)
     }
     
     

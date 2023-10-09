@@ -1,7 +1,7 @@
 
 import SwiftUI
 
-final class MoviesSceneBuilder {
+final class MoviesSceneBuilder: MoviesSearchVMSceneBuilder {
 
     struct Dependencies {
         let apiDataTransferService: DataTransferService
@@ -20,18 +20,14 @@ final class MoviesSceneBuilder {
     func makeMoviesSearchScreen() -> some View {
         let useCase = makeSearchMoviesUseCase()
         let repository = makePosterImagesRepository()
-        
-        let screenBuilder = DefaultMoviesVM.ScreenBuilder(
-            movieDetails: makeMovieDetailsScreen
-        )
-        
+                
         let moviesQueriesVM = makeMoviesQueriesVM()
         
         let vm = DefaultMoviesVM(
-            screenBuilder: screenBuilder,
             searchMoviesUseCase: useCase,
             posterImagesRepository: repository,
-            moviesQueriesVM: moviesQueriesVM
+            moviesQueriesVM: moviesQueriesVM,
+            moviesSceneBuilder: self
         )
         
         return MoviesSearchScreen(viewModel: vm)
@@ -67,11 +63,7 @@ final class MoviesSceneBuilder {
     
     // MARK: - Moviey Details Screen
     
-    lazy var makeMovieDetailsScreen: (Movie) -> MovieDetailsScreen<DefaultMovieDetailsVM> = { [weak self] (movie) in
-        
-        guard let self = self else {
-            fatalError("The instance was deallocated before the closure was called.")
-        }
+    func makeMovieDetailsScreen(movie: Movie) -> MovieDetailsScreen<DefaultMovieDetailsVM> {
         
         let repository = self.makePosterImagesRepository()
         let vm = DefaultMovieDetailsVM(
