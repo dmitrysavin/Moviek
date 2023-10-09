@@ -212,7 +212,7 @@
 		C27C67A52AC4D94A00491C7E /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				C27C67BE2AC5450700491C7E /* Utils */,
+				C27C67BF2AC5451300491C7E /* RepositoryTask.swift */,
 				C27C67A62AC4D99100491C7E /* DefaultMoviesRepository.swift */,
 				C2CC9AE62AC7AA1F000490EE /* DefaultPosterImagesRepository.swift */,
 				C2E613242ACE184A0082E642 /* DefaultMoviesQueriesRepository.swift */,
@@ -223,19 +223,11 @@
 		C27C67AA2AC52C5300491C7E /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				C27C67AB2AC52C7300491C7E /* DataMapping */,
+				C27C67AC2AC52C8600491C7E /* MoviesRequestDTO+Mapping.swift */,
+				C27C67AE2AC52C9800491C7E /* MoviesResponseDTO+Mapping.swift */,
 				C27C67B22AC543A300491C7E /* APIEndpoints.swift */,
 			);
 			path = Network;
-			sourceTree = "<group>";
-		};
-		C27C67AB2AC52C7300491C7E /* DataMapping */ = {
-			isa = PBXGroup;
-			children = (
-				C27C67AC2AC52C8600491C7E /* MoviesRequestDTO+Mapping.swift */,
-				C27C67AE2AC52C9800491C7E /* MoviesResponseDTO+Mapping.swift */,
-			);
-			path = DataMapping;
 			sourceTree = "<group>";
 		};
 		C27C67B42AC543F500491C7E /* Infrastructure */ = {
@@ -255,14 +247,6 @@
 				C27C67BC2AC5445C00491C7E /* NetworkConfig.swift */,
 			);
 			path = Network;
-			sourceTree = "<group>";
-		};
-		C27C67BE2AC5450700491C7E /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				C27C67BF2AC5451300491C7E /* RepositoryTask.swift */,
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		C27C67C22AC54A5400491C7E /* Resources */ = {
@@ -308,8 +292,8 @@
 		C2E613272ACE18EA0082E642 /* MoviesQueriesStorage */ = {
 			isa = PBXGroup;
 			children = (
-				C2E6132A2ACE18FF0082E642 /* UserDefaultsStorage */,
 				C2E613282ACE18F80082E642 /* MoviesQueriesStorage.swift */,
+				C2E6132A2ACE18FF0082E642 /* UserDefaultsStorage */,
 			);
 			path = MoviesQueriesStorage;
 			sourceTree = "<group>";
@@ -317,18 +301,10 @@
 		C2E6132A2ACE18FF0082E642 /* UserDefaultsStorage */ = {
 			isa = PBXGroup;
 			children = (
-				C2E6132D2ACE19650082E642 /* DataMapping */,
+				C2E6132E2ACE19710082E642 /* MovieQueryUDS+Mapping.swift */,
 				C2E6132B2ACE19140082E642 /* UserDefaultsMoviesQueriesStorage.swift */,
 			);
 			path = UserDefaultsStorage;
-			sourceTree = "<group>";
-		};
-		C2E6132D2ACE19650082E642 /* DataMapping */ = {
-			isa = PBXGroup;
-			children = (
-				C2E6132E2ACE19710082E642 /* MovieQueryUDS+Mapping.swift */,
-			);
-			path = DataMapping;
 			sourceTree = "<group>";
 		};
 		C2F65FCC2ACB6DFA00156C10 /* MoviesQueries */ = {
@@ -373,13 +349,13 @@
 		C2FA5F282AC268710002F85A /* Moviek */ = {
 			isa = PBXGroup;
 			children = (
-				C27C67C22AC54A5400491C7E /* Resources */,
-				C27C67B42AC543F500491C7E /* Infrastructure */,
-				C27C67A42AC4D93E00491C7E /* Data */,
-				C27C679D2AC4D89A00491C7E /* Common */,
-				C2FA5F662AC2A84D0002F85A /* Domain */,
-				C2FA5F5B2AC2A2020002F85A /* Presentation */,
 				C2FA5F532AC29F1D0002F85A /* Application */,
+				C2FA5F5B2AC2A2020002F85A /* Presentation */,
+				C2FA5F662AC2A84D0002F85A /* Domain */,
+				C27C67A42AC4D93E00491C7E /* Data */,
+				C27C67B42AC543F500491C7E /* Infrastructure */,
+				C27C679D2AC4D89A00491C7E /* Common */,
+				C27C67C22AC54A5400491C7E /* Resources */,
 				C2FA5F2F2AC268720002F85A /* Preview Content */,
 			);
 			path = Moviek;
