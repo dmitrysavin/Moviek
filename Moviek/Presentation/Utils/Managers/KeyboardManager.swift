@@ -4,13 +4,28 @@ import SwiftUI
 
 class KeyboardManager: ObservableObject {
     
+    // MARK: - Exposed properties
+    
     @Published var isKeyboardVisible: Bool = false
     
+    
+    // MARK: - Private properties
+    
     private var cancellables: Set<AnyCancellable> = []
+    
+    
+    // MARK: - Exposed methods
     
     init() {
         subscribeToKeyboardNotifications()
     }
+    
+    deinit {
+        cancellables.forEach { $0.cancel() }
+    }
+
+    
+    // MARK: - Private methods
     
     private func subscribeToKeyboardNotifications() {
     
@@ -23,9 +38,5 @@ class KeyboardManager: ObservableObject {
             .map { _ in false }
             .assign(to: \.isKeyboardVisible, on: self)
             .store(in: &cancellables)
-    }
-    
-    deinit {
-        cancellables.forEach { $0.cancel() }
     }
 }

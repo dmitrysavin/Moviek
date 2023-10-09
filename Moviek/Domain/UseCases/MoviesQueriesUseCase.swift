@@ -14,8 +14,13 @@ protocol MoviesQueriesUseCase {
 
 struct DefaultMoviesQueriesUseCase: MoviesQueriesUseCase {
 
+    // MARK: - Private properties
+    
     private let moviesQueriesRepository: MoviesQueriesRepository
 
+    
+    // MARK: - Exposed methods
+    
     init(moviesQueriesRepository: MoviesQueriesRepository) {
         self.moviesQueriesRepository = moviesQueriesRepository
     }

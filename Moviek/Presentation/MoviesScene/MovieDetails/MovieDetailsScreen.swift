@@ -1,10 +1,16 @@
+
 import SwiftUI
 import Kingfisher
 
 struct MovieDetailsScreen<VM: MovieDetailsVM>: View {
+
+    // MARK: - Private properties
     
     @ObservedObject private var viewModel: VM
 
+    
+    // MARK: - Exposed methods
+    
     init(viewModel: VM) {
         self.viewModel = viewModel
     }

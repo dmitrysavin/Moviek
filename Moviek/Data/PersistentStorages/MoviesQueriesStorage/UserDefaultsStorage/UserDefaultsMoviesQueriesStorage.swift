@@ -2,10 +2,16 @@
 import Foundation
 
 final class UserDefaultsMoviesQueriesStorage {
+    
+    // MARK: - Private properties
+    
     private let maxStorageLimit: Int
     private let recentsMoviesQueriesKey = "recentsMoviesQueries"
     private var userDefaults: UserDefaults
     private let backgroundQueue: DispatchQueueType
+    
+    
+    // MARK: - Exposed methods
     
     init(
         maxStorageLimit: Int,
@@ -16,6 +22,9 @@ final class UserDefaultsMoviesQueriesStorage {
         self.userDefaults = userDefaults
         self.backgroundQueue = backgroundQueue
     }
+    
+    
+    // MARK: - Private methods
 
     private func fetchMoviesQueries() -> [MovieQuery] {
         if let queriesData = userDefaults.object(forKey: recentsMoviesQueriesKey) as? Data {
@@ -33,10 +42,26 @@ final class UserDefaultsMoviesQueriesStorage {
             userDefaults.set(encoded, forKey: recentsMoviesQueriesKey)
         }
     }
+    
+    private func cleanUpQueries(for query: MovieQuery, in queries: inout [MovieQuery]) {
+        removeDuplicates(for: query, in: &queries)
+        removeQueries(limit: maxStorageLimit - 1, in: &queries)
+    }
+
+    private func removeDuplicates(for query: MovieQuery, in queries: inout [MovieQuery]) {
+        queries = queries.filter { $0 != query }
+    }
+
+    private func removeQueries(limit: Int, in queries: inout [MovieQuery]) {
+        queries = queries.count <= limit ? queries : Array(queries[0..<limit])
+    }
 }
+
 
 extension UserDefaultsMoviesQueriesStorage: MoviesQueriesStorage {
 
+    // MARK: - Exposed methods
+    
     func fetchRecentsQueries(
         maxCount: Int,
         completion: @escaping (Result<[MovieQuery], Error>) -> Void
@@ -64,23 +89,5 @@ extension UserDefaultsMoviesQueriesStorage: MoviesQueriesStorage {
 
             completion(.success(query))
         }
-    }
-}
-
-
-// MARK: - Private
-extension UserDefaultsMoviesQueriesStorage {
-
-    private func cleanUpQueries(for query: MovieQuery, in queries: inout [MovieQuery]) {
-        removeDuplicates(for: query, in: &queries)
-        removeQueries(limit: maxStorageLimit - 1, in: &queries)
-    }
-
-    private func removeDuplicates(for query: MovieQuery, in queries: inout [MovieQuery]) {
-        queries = queries.filter { $0 != query }
-    }
-
-    private func removeQueries(limit: Int, in queries: inout [MovieQuery]) {
-        queries = queries.count <= limit ? queries : Array(queries[0..<limit])
     }
 }

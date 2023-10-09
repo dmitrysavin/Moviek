@@ -3,7 +3,12 @@ import SwiftUI
 
 struct MoviesSearchResultView<VM: MoviesSearchVM>: View {
     
+    // MARK: - Private properties
+    
     @ObservedObject private var viewModel: VM
+    
+    
+    // MARK: - Exposed methods
     
     init(viewModel: VM) {
         self.viewModel = viewModel

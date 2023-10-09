@@ -12,7 +12,7 @@ final class AppFlowCoordinator {
     func start() -> some View {
         // In App Flow we can check if user needs to login, if yes we can show login screen
         
-        let moviesSceneDIContainer = appDIContainer.makeMoviesSceneDIContainer()
+        let moviesSceneDIContainer = appDIContainer.makeMoviesSceneDIContainer() // rename
         let screen = moviesSceneDIContainer.makeMoviesSearchScreen()
         return screen
     }

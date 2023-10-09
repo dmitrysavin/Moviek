@@ -448,7 +448,7 @@
 				C2FA5F622AC2A6810002F85A /* MoviesSearchVM.swift */,
 				C2FA5F5E2AC2A2750002F85A /* MoviesSearchScreen.swift */,
 				C2FA5F6A2AC2ACF70002F85A /* MoviesSearchResultView.swift */,
-				C2FA5F6C2AC2ADED0002F85A /* Cell */,
+				C2FA5F6C2AC2ADED0002F85A /* Cells */,
 			);
 			path = MoviesSearch;
 			sourceTree = "<group>";
@@ -472,13 +472,13 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		C2FA5F6C2AC2ADED0002F85A /* Cell */ = {
+		C2FA5F6C2AC2ADED0002F85A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				C2FA5F642AC2A70C0002F85A /* MovieCellVM.swift */,
 				C2FA5F6D2AC2ADFA0002F85A /* MovieСell.swift */,
 			);
-			path = Cell;
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		C2FA5F6F2AC42DBC0002F85A /* UseCases */ = {

@@ -1,9 +1,3 @@
-//
-//  MoviekApp.swift
-//  Moviek
-//
-//  Created by Dmytro Savin on 26.09.2023.
-//
 
 import SwiftUI
 
@@ -11,7 +5,7 @@ import SwiftUI
 struct MoviekApp: App {
     
     private let appDIContainer = AppDIContainer()
-    private var appFlowCoordinator: AppFlowCoordinator
+    private var appFlowCoordinator: AppFlowCoordinator // check 
 
     init() {
         appFlowCoordinator = AppFlowCoordinator(appDIContainer: appDIContainer)

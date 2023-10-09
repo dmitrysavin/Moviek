@@ -15,8 +15,13 @@ protocol SearchMoviesUseCase {
 
 final class DefaultSearchMoviesUseCase: SearchMoviesUseCase {
         
+    // MARK: - Private properties
+    
     private let moviesRepository: MoviesRepository
     private let moviesQueriesRepository: MoviesQueriesRepository
+    
+    
+    // MARK: - Exposed methods
     
     init(
         moviesRepository: MoviesRepository,

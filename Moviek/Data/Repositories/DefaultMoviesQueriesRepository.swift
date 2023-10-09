@@ -3,7 +3,12 @@ import Foundation
 
 final class DefaultMoviesQueriesRepository {
     
+    // MARK: - Private properties
+    
     private var moviesQueriesPersistentStorage: MoviesQueriesStorage
+    
+    
+    // MARK: - Exposed methods
     
     init(moviesQueriesPersistentStorage: MoviesQueriesStorage) {
         self.moviesQueriesPersistentStorage = moviesQueriesPersistentStorage
@@ -11,6 +16,8 @@ final class DefaultMoviesQueriesRepository {
 }
 
 extension DefaultMoviesQueriesRepository: MoviesQueriesRepository {
+    
+    // MARK: - Exposed methods
     
     func fetchRecentsQueries(
         maxCount: Int,

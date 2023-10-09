@@ -3,11 +3,15 @@ import SwiftUI
 
 struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
     
+    // MARK: - Private properties
+    
     @ObservedObject private var viewModel: VM
     @ObservedObject private var keyboardManager = KeyboardManager()
     @State private var showAlert = false
     @State private var searchText: String = ""
     
+    
+    // MARK: - Exposed methods
     
     init(viewModel: VM) {
         self.viewModel = viewModel

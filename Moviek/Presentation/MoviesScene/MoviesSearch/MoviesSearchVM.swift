@@ -33,7 +33,7 @@ protocol MoviesSearchVM: MoviesVMInput & MoviesVMOutput & ObservableObject {
 
 final class DefaultMoviesVM: MoviesSearchVM {
 
-    private let sceneBuilder: MoviesSceneBuilder
+    // MARK: - Exposed properties
     
     @Published var items: [MovieCellVM] = []
     @Published var searchText: String = ""
@@ -44,6 +44,10 @@ final class DefaultMoviesVM: MoviesSearchVM {
     
     var moviesQueriesVM: DefaultMoviesQueriesVM
     
+    
+    // MARK: - Private properties
+    
+    private let sceneBuilder: MoviesSceneBuilder
     private let searchMoviesUseCase: SearchMoviesUseCase
     private var pages: [MoviesPage] = []
     private let mainQueue: DispatchQueueType
@@ -51,6 +55,8 @@ final class DefaultMoviesVM: MoviesSearchVM {
     private let posterImagesRepository: PosterImagesRepository
     private var moviesLoadTask: Cancellable? { willSet { moviesLoadTask?.cancel() } }
     
+    
+    // MARK: - Exposed methods
     
     init(
         searchMoviesUseCase: SearchMoviesUseCase,
@@ -66,9 +72,6 @@ final class DefaultMoviesVM: MoviesSearchVM {
         self.sceneBuilder = moviesSceneBuilder
         self.mainQueue = mainQueue
     }
-    
-    
-    // MARK: - MoviesSearchVM
     
     func didSearch(text searchText: String) {
         resetSearch(forText: searchText)
@@ -95,7 +98,7 @@ final class DefaultMoviesVM: MoviesSearchVM {
     }
     
     
-    // MARK: - Private
+    // MARK: - Private methods
     
     private func resetSearch(forText searchText: String) {
         pages.removeAll()

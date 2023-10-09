@@ -3,8 +3,17 @@ import SwiftUI
 
 struct MoviesQueriesView<VM: MoviesQueriesVM>: View {
     
+    // MARK: - Private properties
+    
     @ObservedObject private var viewModel: VM
+    
+    
+    // MARK: - Exposed properties
+    
     var onTap: ((MoviesQueryCellVM) -> Void)? = nil
+    
+    
+    // MARK: - Exposed methods
     
     init(viewModel: VM, onTap: ((MoviesQueryCellVM) -> Void)? = nil) {
         self.viewModel = viewModel

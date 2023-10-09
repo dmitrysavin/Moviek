@@ -1,9 +1,19 @@
+
 import SwiftUI
 
 struct MoviesQueryCell: View {
+
+    // MARK: - Exposed properties
+    
+    var onTap: ((MoviesQueryCellVM) -> Void)? = nil
+
+    
+    // MARK: - Private properties
     
     private var viewModel: MoviesQueryCellVM
-    var onTap: ((MoviesQueryCellVM) -> Void)? = nil
+    
+    
+    // MARK: - Exposed methods
     
     init(viewModel: MoviesQueryCellVM, onTap: ((MoviesQueryCellVM) -> Void)? = nil) {
         self.viewModel = viewModel

@@ -14,11 +14,19 @@ protocol MoviesQueriesVM: MoviesQueriesVMInput & MoviesQueriesVMOutput & Observa
 
 final class DefaultMoviesQueriesVM: MoviesQueriesVM {
     
+    // MARK: - Exposed properties
+    
     @Published var items: [MoviesQueryCellVM] = []
+    
+    
+    // MARK: - Private properties
     
     private let searchMoviesUseCase: MoviesQueriesUseCase
     private let mainQueue: DispatchQueueType
     private var queriesLoadTask: Cancellable? { willSet { queriesLoadTask?.cancel() } }
+    
+    
+    // MARK: - Exposed methods
     
     init(
         searchMoviesUseCase: MoviesQueriesUseCase,

@@ -1,7 +1,5 @@
 
 import Foundation
-import UIKit
-import Combine
 
 protocol MovieDetailsVMOutput {
     var posterURL: URL? { get }
@@ -18,6 +16,8 @@ protocol MovieDetailsVM: MovieDetailsVMOutput & ObservableObject {
 
 final class DefaultMovieDetailsVM: MovieDetailsVM {
     
+    // MARK: - Exposed properties
+
     @Published var posterURL: URL?
     
     var title: String
@@ -25,9 +25,11 @@ final class DefaultMovieDetailsVM: MovieDetailsVM {
     var releaseDate: String?
     var overview: String
     
+    
+    // MARK: - Private properties
+    
     private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() } }
     private let mainQueue: DispatchQueueType = DispatchQueue.main
-    
     private let posterImagesRepository: PosterImagesRepository
 
     var imageWidth: Int = 154 {
@@ -38,6 +40,8 @@ final class DefaultMovieDetailsVM: MovieDetailsVM {
         }
     }
     
+    
+    // MARK: - Exposed methods
     
     init(
         movie: Movie,
@@ -57,7 +61,10 @@ final class DefaultMovieDetailsVM: MovieDetailsVM {
         updatePosterURL()
     }
     
-    func updatePosterURL() {
+    
+    // MARK: - Private methods
+    
+    private func updatePosterURL() {
         guard let imagePath = self.posterImagePath else { return }
         
         self.posterURL = posterImagesRepository.posterUrl(

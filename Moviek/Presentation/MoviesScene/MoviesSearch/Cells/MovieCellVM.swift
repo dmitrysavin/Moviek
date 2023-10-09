@@ -3,6 +3,8 @@ import Foundation
 
 final class MovieCellVM: ObservableObject {
     
+    // MARK: - Exposed properties
+    
     @Published var posterURL: URL?
     
     let title: String
@@ -10,8 +12,13 @@ final class MovieCellVM: ObservableObject {
     let releaseDate: String?
     let imageSize: CGSize = CGSize(width: 92.0, height: 138.0)
     
+    
+    // MARK: - Private properties
+    
     private let posterImagesRepository: PosterImagesRepository
     
+    
+    // MARK: - Exposed methods
     
     init(
         movie: Movie,
