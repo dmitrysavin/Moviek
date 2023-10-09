@@ -1,7 +1,5 @@
 
 import Foundation
-import UIKit
-import Combine
 
 final class MovieCellVM: ObservableObject {
     
@@ -10,19 +8,9 @@ final class MovieCellVM: ObservableObject {
     let title: String
     let posterImagePath: String?
     let releaseDate: String?
-    
-    private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() } }
-    private let mainQueue: DispatchQueueType = DispatchQueue.main
+    let imageSize: CGSize = CGSize(width: 92.0, height: 138.0)
     
     private let posterImagesRepository: PosterImagesRepository
-
-    var imageWidth: Int = 100 {
-        didSet {
-            DispatchQueue.main.async { // This is to handle worning: Publishing changes from within view updates is not allowed, this will cause undefined behavior.
-                self.updatePosterURL()
-            }
-        }
-    }
     
     
     init(
@@ -47,7 +35,7 @@ final class MovieCellVM: ObservableObject {
         
         self.posterURL = posterImagesRepository.posterUrl(
             withImagePath: imagePath,
-            width: imageWidth
+            width: Int(imageSize.width)
         )
     }    
 }

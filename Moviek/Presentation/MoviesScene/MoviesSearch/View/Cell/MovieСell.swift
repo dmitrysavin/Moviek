@@ -6,12 +6,9 @@ struct MovieСell: View {
     
     @ObservedObject private var viewModel: MovieCellVM
     
-    private let imageWidth: Int = 92
-    
     
     init(viewModel: MovieCellVM) {
         self.viewModel = viewModel
-        self.viewModel.imageWidth = imageWidth
     }
     
     var body: some View {
@@ -35,7 +32,8 @@ struct MovieСell: View {
                 .placeholder {
                     Rectangle().fill(Color.gray)
                 }
-                .frame(width: CGFloat(imageWidth), height: 138)
+                .frame(width: viewModel.imageSize.width,
+                       height: viewModel.imageSize.height)
         }
     }
 }
