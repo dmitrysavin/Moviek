@@ -173,6 +173,25 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		C21665CB2AD3BF4700F15016 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				C2CC9ADE2AC66E0A000490EE /* LoadNextPageManager.swift */,
+				C2E6131C2ACE074D0082E642 /* KeyboardManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		C21665CC2AD3BF6900F15016 /* Common views */ = {
+			isa = PBXGroup;
+			children = (
+				C27C67C42AC554CB00491C7E /* LoadingView.swift */,
+				C2F65FCA2ACB55B500156C10 /* NoResultsView.swift */,
+				C2CC9AE02AC676EB000490EE /* LoadMoreFooter.swift */,
+			);
+			path = "Common views";
+			sourceTree = "<group>";
+		};
 		C27C679D2AC4D89A00491C7E /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,12 +281,10 @@
 		C27C67C32AC554C000491C7E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				C2CC9ADE2AC66E0A000490EE /* LoadNextPageManager.swift */,
-				C27C67C42AC554CB00491C7E /* LoadingView.swift */,
-				C2F65FCA2ACB55B500156C10 /* NoResultsView.swift */,
-				C2CC9AE02AC676EB000490EE /* LoadMoreFooter.swift */,
+				C21665CC2AD3BF6900F15016 /* Common views */,
+				C21665CB2AD3BF4700F15016 /* Managers */,
+				C21665C82AD3B03800F15016 /* Extensions */,
 				C2CC9AE22AC69804000490EE /* ViewModelLoadingState.swift */,
-				C2E6131C2ACE074D0082E642 /* KeyboardManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -409,7 +426,6 @@
 		C2FA5F5B2AC2A2020002F85A /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				C21665C82AD3B03800F15016 /* Extensions */,
 				C27C67C32AC554C000491C7E /* Utils */,
 				C2FA5F5C2AC2A2130002F85A /* MoviesScene */,
 			);
