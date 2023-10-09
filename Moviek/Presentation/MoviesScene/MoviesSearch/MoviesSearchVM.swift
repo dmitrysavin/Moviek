@@ -49,7 +49,6 @@ final class DefaultMoviesVM: MoviesSearchVM {
     private let mainQueue: DispatchQueueType
     private let loadNextPageCoordinator: LoadNextPageCoordinator
     private let posterImagesRepository: PosterImagesRepository
-    
     private var moviesLoadTask: Cancellable? { willSet { moviesLoadTask?.cancel() } }
     
     
@@ -82,9 +81,12 @@ final class DefaultMoviesVM: MoviesSearchVM {
     }
     
     func didLoadNextPage() {
-        guard loadNextPageCoordinator.hasNextPage, loadingState == .none else { return }
+        guard loadNextPageCoordinator.hasNextPage,
+                loadingState == .none
+        else { return }
         
-        searchMovies(forText: searchText, loadingState: .nextPage)
+        searchMovies(forText: searchText,
+                     loadingState: .nextPage)
     }
     
     func didSelectItem(at index: Int) -> MovieDetailsScreen<DefaultMovieDetailsVM> {
