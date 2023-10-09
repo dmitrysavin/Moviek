@@ -7,7 +7,7 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
     @State private var showAlert = false
     @State private var searchText: String = ""
   
-    @ObservedObject private var keyboardCoordinator = KeyboardCoordinator()
+    @ObservedObject private var keyboardManager = KeyboardManager()
     
     
     init(viewModel: VM) {
@@ -20,7 +20,7 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
         
         NavigationView {
             VStack {
-                if keyboardCoordinator.isKeyboardVisible &&
+                if keyboardManager.isKeyboardVisible &&
                     moviesQueriesVM.items.count > 0 &&
                     searchText.isEmpty &&
                     viewModel.loadingState == .none {
