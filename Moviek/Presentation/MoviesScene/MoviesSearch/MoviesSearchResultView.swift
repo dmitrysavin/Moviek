@@ -6,12 +6,17 @@ struct MoviesSearchResultView<VM: MoviesSearchVM>: View {
     // MARK: - Private properties
     
     @ObservedObject private var viewModel: VM
+    private let sceneBuilder: DefaultMoviesSceneBuilder
     
     
     // MARK: - Exposed methods
     
-    init(viewModel: VM) {
+    init(
+        viewModel: VM,
+        sceneBuilder: DefaultMoviesSceneBuilder = DefaultMoviesSceneBuilder()
+    ) {
         self.viewModel = viewModel
+        self.sceneBuilder = sceneBuilder
     }
     
     var body: some View {
@@ -20,7 +25,8 @@ struct MoviesSearchResultView<VM: MoviesSearchVM>: View {
                 ForEach(viewModel.items.indices, id: \.self) { index in
                     if index < viewModel.items.count { // Validate the index before accessing
                         NavigationLink {
-                            viewModel.didSelectItem(at: index)
+                            viewModel.movieDetailsScreen(forMovieIndex: index,
+                                                         builder: sceneBuilder)
                         } label: {
                             let vm = viewModel.items[index]
                             MovieСell(viewModel: vm)
@@ -41,9 +47,7 @@ struct MoviesSearchResultView<VM: MoviesSearchVM>: View {
             if viewModel.loadingState == .firstPage {
                 LoadingView()
                     .edgesIgnoringSafeArea(.all)
-            }
-            
-            if viewModel.loadingState == .emptyPage {
+            } else if viewModel.loadingState == .emptyPage {
                 NoResultsView()
                     .edgesIgnoringSafeArea(.all)
             }

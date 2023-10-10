@@ -10,25 +10,28 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
     @State private var showAlert = false
     @State private var searchText: String = ""
     
+    private let sceneBuilder: DefaultMoviesSceneBuilder
+    
     
     // MARK: - Exposed methods
     
-    init(viewModel: VM) {
+    init(viewModel: VM,
+         moviesSceneBuilder: DefaultMoviesSceneBuilder
+    ) {
         self.viewModel = viewModel
+        self.sceneBuilder = moviesSceneBuilder
     }
     
     var body: some View {
         var vm = viewModel // Capture a mutable reference
-        let moviesQueriesVM = viewModel.moviesQueriesVM
         
         NavigationView {
             VStack {
                 if keyboardManager.isKeyboardVisible &&
-                    moviesQueriesVM.items.count > 0 &&
                     searchText.isEmpty &&
                     viewModel.loadingState == .none {
-                    
-                    MoviesQueriesView(viewModel: moviesQueriesVM) { selectedQueryVM in
+
+                    sceneBuilder.makeMoviesQueriesView { selectedQueryVM in
                         searchText = selectedQueryVM.query
                         viewModel.didSearch(text: searchText)
                         hideKeyboard()
@@ -59,9 +62,6 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
                         vm.showAlert = false
                         showAlert = false
                       })
-            }
-            .onAppear() {
-                moviesQueriesVM.updateMoviesQueries()
             }
         }
     }

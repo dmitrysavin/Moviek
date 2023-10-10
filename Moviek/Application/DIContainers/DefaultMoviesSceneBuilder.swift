@@ -1,36 +1,39 @@
 
 import SwiftUI
 
-final class MoviesSceneBuilder: MoviesSearchVMSceneBuilder {
+protocol MoviesSceneBuilder {
+    associatedtype MovieDetailsVMType: MovieDetailsVM
+    func makeMovieDetailsScreen(movie: Movie) -> MovieDetailsScreen<MovieDetailsVMType>
+}
 
-    struct Dependencies {
-        let apiDataTransferService: DataTransferService
-        let imagesBasePath: String
-    }
+final class DefaultMoviesSceneBuilder: MoviesSceneBuilder {
 
-    private let dependencies: Dependencies
+    let apiDataTransferService: DataTransferService
+    let imageDataTransferService: DataTransferService
     
-    init(dependencies: Dependencies) {
-        self.dependencies = dependencies
+    init(
+        apiDataTransferService: DataTransferService = AppDIContainer.apiDataTransferService,
+        imageDataTransferService: DataTransferService = AppDIContainer.imageDataTransferService
+    ) {
+        self.apiDataTransferService = apiDataTransferService
+        self.imageDataTransferService = imageDataTransferService
     }
-
     
     // MARK: - Movies Search Screen
     
-    func makeMoviesSearchScreen() -> some View {
+    func makeMoviesSearchScreen() -> MoviesSearchScreen<DefaultMoviesVM> {
         let useCase = makeSearchMoviesUseCase()
-        let repository = makePosterImagesRepository()
-                
-        let moviesQueriesVM = makeMoviesQueriesVM()
         
         let vm = DefaultMoviesVM(
-            searchMoviesUseCase: useCase,
-            posterImagesRepository: repository,
-            moviesQueriesVM: moviesQueriesVM,
+            searchMoviesUseCase: useCase
+        )
+        
+        let screen = MoviesSearchScreen(
+            viewModel: vm,
             moviesSceneBuilder: self
         )
         
-        return MoviesSearchScreen(viewModel: vm)
+        return screen
     }
     
     func makeSearchMoviesUseCase() -> SearchMoviesUseCase {
@@ -45,7 +48,7 @@ final class MoviesSceneBuilder: MoviesSearchVMSceneBuilder {
     
     func makeMoviesRepository() -> MoviesRepository {
         DefaultMoviesRepository(
-            dataTransferService: dependencies.apiDataTransferService
+            dataTransferService: apiDataTransferService
         )
     }
 
@@ -54,28 +57,25 @@ final class MoviesSceneBuilder: MoviesSearchVMSceneBuilder {
         let repository = DefaultMoviesQueriesRepository(moviesQueriesPersistentStorage: storage)
         return repository
     }
-    
-    func makePosterImagesRepository() -> PosterImagesRepository {
-        let path = dependencies.imagesBasePath
-        return DefaultPosterImagesRepository(imagesBasePath: path)
-    }
-    
+        
     
     // MARK: - Moviey Details Screen
     
     func makeMovieDetailsScreen(movie: Movie) -> MovieDetailsScreen<DefaultMovieDetailsVM> {
-        
-        let repository = self.makePosterImagesRepository()
-        let vm = DefaultMovieDetailsVM(
-            movie: movie,
-            posterImagesRepository: repository
-        )
-        
+        let vm = DefaultMovieDetailsVM(movie: movie)
         return MovieDetailsScreen(viewModel: vm)
     }
     
     
     // MARK: - Movies Queries View
+    
+    func makeMoviesQueriesView(onTap: @escaping (MoviesQueryCellVM) -> Void) -> some View {
+        let vm = makeMoviesQueriesVM()
+        var view = MoviesQueriesView(viewModel: vm)
+        view.onTap = onTap
+        
+        return view
+    }
     
     func makeMoviesQueriesVM() -> DefaultMoviesQueriesVM {
         let useCase = makeMoviesQueriesUseCase()

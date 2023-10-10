@@ -3,16 +3,13 @@ import Foundation
 
 final class AppDIContainer {
     
-    lazy var appConfiguration = AppConfiguration()
-    
-    
     // MARK: - Network
     
-    lazy var apiDataTransferService: DataTransferService = {
+    static let apiDataTransferService: DataTransferService = {
         let config = ApiDataNetworkConfig(
-            baseURL: URL(string: appConfiguration.apiBaseURL)!,
+            baseURL: URL(string: AppConfiguration.apiBaseURL)!,
             queryParameters: [
-                "api_key": appConfiguration.apiKey,
+                "api_key": AppConfiguration.apiKey,
                 "language": NSLocale.preferredLanguages.first ?? "en"
             ]
         )
@@ -21,22 +18,12 @@ final class AppDIContainer {
         return DefaultDataTransferService(with: apiDataNetwork)
     }()
     
-    lazy var imageDataTransferService: DataTransferService = {
+    static let imageDataTransferService: DataTransferService = {
         let config = ApiDataNetworkConfig(
-            baseURL: URL(string: appConfiguration.imagesBaseURL)!
+            baseURL: URL(string: AppConfiguration.imagesBaseURL)!
         )
+        
         let imagesDataNetwork = DefaultNetworkService(config: config)
         return DefaultDataTransferService(with: imagesDataNetwork)
     }()
-    
-    
-    // MARK: - DIContainers of scenes
-    
-    func makeMoviesSceneDIContainer() -> MoviesSceneBuilder {
-        let dependencies = MoviesSceneBuilder.Dependencies(
-            apiDataTransferService: apiDataTransferService,
-            imagesBasePath: appConfiguration.imagesBaseURL
-        )
-        return MoviesSceneBuilder(dependencies: dependencies)
-    }
 }

@@ -10,19 +10,19 @@ final class MovieCellVM: ObservableObject {
     let title: String
     let posterImagePath: String?
     let releaseDate: String?
-    let imageSize: CGSize = CGSize(width: 92.0, height: 138.0)
+    let imageWidth: Int = 92
     
     
     // MARK: - Private properties
     
-    private let posterImagesRepository: PosterImagesRepository
+    private let imagePathResolver: ImagePathResolver
     
     
     // MARK: - Exposed methods
     
     init(
         movie: Movie,
-        posterImagesRepository: PosterImagesRepository
+        imagePathResolver: ImagePathResolver = ImagePathResolver()
     ) {
         self.title = movie.title ?? ""
         self.posterImagePath = movie.posterPath
@@ -33,16 +33,16 @@ final class MovieCellVM: ObservableObject {
             self.releaseDate = nil
         }
         
-        self.posterImagesRepository = posterImagesRepository
+        self.imagePathResolver = imagePathResolver
         updatePosterURL()
     }
     
     func updatePosterURL() {
         guard let imagePath = self.posterImagePath else { return }
         
-        self.posterURL = posterImagesRepository.posterUrl(
+        self.posterURL = imagePathResolver.imageUrl(
             withImagePath: imagePath,
-            width: Int(imageSize.width)
+            width: imageWidth
         )
     }    
 }

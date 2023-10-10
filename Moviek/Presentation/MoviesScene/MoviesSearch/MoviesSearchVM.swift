@@ -2,27 +2,19 @@
 import Foundation
 import SwiftUI
 
-protocol MoviesSearchVMSceneBuilder {
-    associatedtype MovieDetailsVMType: MovieDetailsVM
-    func makeMovieDetailsScreen(movie: Movie) -> MovieDetailsScreen<MovieDetailsVMType>
-}
-
 protocol MoviesVMInput {
-    associatedtype MovieDetailsVMType: MovieDetailsVM
-    
     func didSearch(text searchText: String)
     func didCancelSearch()
     func didLoadNextPage()
-    func didSelectItem(at index: Int) -> MovieDetailsScreen<MovieDetailsVMType>
+    func movieDetailsScreen(
+        forMovieIndex index: Int,
+        builder: DefaultMoviesSceneBuilder) -> MovieDetailsScreen<DefaultMovieDetailsVM>
 }
 
 protocol MoviesVMOutput {
-    associatedtype MoviesQueriesVMType: MoviesQueriesVM
-    
     var items: [MovieCellVM] { get }
     var searchText: String { get set }
     var loadingState: ViewModelLoadingState { get }
-    var moviesQueriesVM: MoviesQueriesVMType { get }
     
     var showAlert: Bool { get set }
     var errorMessage: String { get }
@@ -42,17 +34,13 @@ final class DefaultMoviesVM: MoviesSearchVM {
     @Published var showAlert: Bool = false
     @Published var errorMessage: String = ""
     
-    var moviesQueriesVM: DefaultMoviesQueriesVM
-    
     
     // MARK: - Private properties
     
-    private let sceneBuilder: MoviesSceneBuilder
     private let searchMoviesUseCase: SearchMoviesUseCase
     private var pages: [MoviesPage] = []
     private let mainQueue: DispatchQueueType
     private let loadNextPageManager: LoadNextPageManager
-    private let posterImagesRepository: PosterImagesRepository
     private var moviesLoadTask: Cancellable? { willSet { moviesLoadTask?.cancel() } }
     
     
@@ -60,16 +48,10 @@ final class DefaultMoviesVM: MoviesSearchVM {
     
     init(
         searchMoviesUseCase: SearchMoviesUseCase,
-        posterImagesRepository: PosterImagesRepository,
-        moviesQueriesVM: DefaultMoviesQueriesVM,
-        moviesSceneBuilder: MoviesSceneBuilder,
         mainQueue: DispatchQueueType = DispatchQueue.main
     ) {
         self.searchMoviesUseCase = searchMoviesUseCase
-        self.posterImagesRepository = posterImagesRepository
         self.loadNextPageManager = LoadNextPageManager(currentPage: 0, totalPageCount: 1)
-        self.moviesQueriesVM = moviesQueriesVM
-        self.sceneBuilder = moviesSceneBuilder
         self.mainQueue = mainQueue
     }
     
@@ -92,11 +74,14 @@ final class DefaultMoviesVM: MoviesSearchVM {
                      loadingState: .nextPage)
     }
     
-    func didSelectItem(at index: Int) -> MovieDetailsScreen<DefaultMovieDetailsVM> {
+    func movieDetailsScreen(
+        forMovieIndex index: Int,
+        builder: DefaultMoviesSceneBuilder) -> MovieDetailsScreen<DefaultMovieDetailsVM> {
+        
         let movie = pages.movies[index]
-        return sceneBuilder.makeMovieDetailsScreen(movie: movie)
+        return builder.makeMovieDetailsScreen(movie: movie)
     }
-    
+
     
     // MARK: - Private methods
     
@@ -110,7 +95,10 @@ final class DefaultMoviesVM: MoviesSearchVM {
         searchMovies(forText: searchText, loadingState: .firstPage)
     }
     
-    private func searchMovies(forText searchText: String, loadingState: ViewModelLoadingState) {
+    private func searchMovies(
+        forText searchText: String,
+        loadingState: ViewModelLoadingState
+    ) {
         self.loadingState = loadingState
         self.searchText = searchText
         
@@ -144,7 +132,7 @@ final class DefaultMoviesVM: MoviesSearchVM {
             + [moviesPage]
         
         items = pages.movies.map {
-            MovieCellVM(movie: $0, posterImagesRepository: posterImagesRepository)
+            MovieCellVM(movie: $0)
         }
         
         if moviesPage.movies.count > 0 {
@@ -152,8 +140,6 @@ final class DefaultMoviesVM: MoviesSearchVM {
         } else {
             loadingState = .emptyPage
         }
-        
-        moviesQueriesVM.updateMoviesQueries()
     }
 
     private func handle(error: Error) {

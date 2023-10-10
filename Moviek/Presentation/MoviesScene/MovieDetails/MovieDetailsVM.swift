@@ -24,28 +24,19 @@ final class DefaultMovieDetailsVM: MovieDetailsVM {
     var posterImagePath: String?
     var releaseDate: String?
     var overview: String
+    var imageWidth: Int = 154
     
     
     // MARK: - Private properties
     
-    private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() } }
-    private let mainQueue: DispatchQueueType = DispatchQueue.main
-    private let posterImagesRepository: PosterImagesRepository
-
-    var imageWidth: Int = 154 {
-        didSet {
-            DispatchQueue.main.async { // This is to handle worning: Publishing changes from within view updates is not allowed, this will cause undefined behavior.
-                self.updatePosterURL()
-            }
-        }
-    }
+    private let imagePathResolver: ImagePathResolver
     
     
     // MARK: - Exposed methods
     
     init(
         movie: Movie,
-        posterImagesRepository: PosterImagesRepository
+        imagePathResolver: ImagePathResolver = ImagePathResolver()
     ) {
         self.title = movie.title ?? ""
         self.posterImagePath = movie.posterPath ?? ""
@@ -57,19 +48,19 @@ final class DefaultMovieDetailsVM: MovieDetailsVM {
             self.releaseDate = nil
         }
         
-        self.posterImagesRepository = posterImagesRepository
+        self.imagePathResolver = imagePathResolver
         updatePosterURL()
     }
     
     
     // MARK: - Private methods
     
-    private func updatePosterURL() {
+    func updatePosterURL() {
         guard let imagePath = self.posterImagePath else { return }
         
-        self.posterURL = posterImagesRepository.posterUrl(
+        self.posterURL = imagePathResolver.imageUrl(
             withImagePath: imagePath,
-            width: imageWidth
+            width: Int(imageWidth)
         )
     }
 }

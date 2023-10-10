@@ -187,6 +187,7 @@ class RawDataResponseDecoder: ResponseDecoder {
     enum CodingKeys: String, CodingKey {
         case `default` = ""
     }
+    
     func decode<T: Decodable>(_ data: Data) throws -> T {
         if T.self is Data.Type, let data = data as? T {
             return data

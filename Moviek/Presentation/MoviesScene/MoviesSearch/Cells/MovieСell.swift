@@ -36,8 +36,8 @@ struct MovieСell: View {
                 .placeholder {
                     Rectangle().fill(Color.gray)
                 }
-                .frame(width: viewModel.imageSize.width,
-                       height: viewModel.imageSize.height)
+                .frame(width: CGFloat(viewModel.imageWidth),
+                       height: CGFloat(viewModel.imageWidth) * 1.5)
         }
     }
 }
