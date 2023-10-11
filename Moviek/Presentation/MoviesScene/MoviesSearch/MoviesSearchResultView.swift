@@ -43,6 +43,7 @@ struct MoviesSearchResultView<VM: MoviesSearchVM>: View {
                     LoadMoreFooter()
                 }
             }
+            .listStyle(PlainListStyle())
 
             if viewModel.loadingState == .firstPage {
                 LoadingView()
