@@ -6,6 +6,7 @@ struct ImagePathResolver {
     // MARK: - Exposed properties
     let imagesBaseURL: String
     
+    
     // MARK: - Exposed methods
     init(imagesBaseURL: String = AppConfiguration.imagesBaseURL) {
         self.imagesBaseURL = imagesBaseURL

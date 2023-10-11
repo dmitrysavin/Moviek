@@ -5,17 +5,14 @@ import SwiftUI
 class KeyboardManager: ObservableObject {
     
     // MARK: - Exposed properties
-    
     @Published var isKeyboardVisible: Bool = false
     
     
     // MARK: - Private properties
-    
     private var cancellables: Set<AnyCancellable> = []
     
     
     // MARK: - Exposed methods
-    
     init() {
         subscribeToKeyboardNotifications()
     }
@@ -26,7 +23,6 @@ class KeyboardManager: ObservableObject {
 
     
     // MARK: - Private methods
-    
     private func subscribeToKeyboardNotifications() {
     
         NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)

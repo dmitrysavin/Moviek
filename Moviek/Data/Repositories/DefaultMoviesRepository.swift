@@ -4,13 +4,11 @@ import Foundation
 final class DefaultMoviesRepository {
     
     // MARK: - Private properties
-    
     private let dataTransferService: DataTransferService
     private let backgroundQueue: DataTransferDispatchQueue
 
     
     // MARK: - Exposed methods
-    
     init(
         dataTransferService: DataTransferService,
         backgroundQueue: DataTransferDispatchQueue = DispatchQueue.global(qos: .userInitiated)
@@ -23,7 +21,6 @@ final class DefaultMoviesRepository {
 extension DefaultMoviesRepository: MoviesRepository {
     
     // MARK: - Private methods
-    
     func fetchMovies(
         searchText: String,
         page: Int,

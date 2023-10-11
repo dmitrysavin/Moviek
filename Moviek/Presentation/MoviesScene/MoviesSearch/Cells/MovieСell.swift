@@ -5,12 +5,10 @@ import Kingfisher
 struct MovieСell: View {
     
     // MARK: - Private properties
-    
     @ObservedObject private var viewModel: MovieCellVM
     
     
     // MARK: - Exposed methods
-    
     init(viewModel: MovieCellVM) {
         self.viewModel = viewModel
     }

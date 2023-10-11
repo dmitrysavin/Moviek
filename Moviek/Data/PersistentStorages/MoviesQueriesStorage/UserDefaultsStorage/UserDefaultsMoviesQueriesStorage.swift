@@ -4,7 +4,6 @@ import Foundation
 final class UserDefaultsMoviesQueriesStorage {
     
     // MARK: - Private properties
-    
     private let maxStorageLimit: Int
     private let recentsMoviesQueriesKey = "recentsMoviesQueries"
     private var userDefaults: UserDefaults
@@ -12,7 +11,6 @@ final class UserDefaultsMoviesQueriesStorage {
     
     
     // MARK: - Exposed methods
-    
     init(
         maxStorageLimit: Int,
         userDefaults: UserDefaults = UserDefaults.standard,
@@ -25,7 +23,6 @@ final class UserDefaultsMoviesQueriesStorage {
     
     
     // MARK: - Private methods
-
     private func fetchMoviesQueries() -> [MovieQuery] {
         if let queriesData = userDefaults.object(forKey: recentsMoviesQueriesKey) as? Data {
             if let movieQueryList = try? JSONDecoder().decode(MovieQueriesListUDS.self, from: queriesData) {
@@ -61,7 +58,6 @@ final class UserDefaultsMoviesQueriesStorage {
 extension UserDefaultsMoviesQueriesStorage: MoviesQueriesStorage {
 
     // MARK: - Exposed methods
-    
     func fetchRecentsQueries(
         maxCount: Int,
         completion: @escaping (Result<[MovieQuery], Error>) -> Void

@@ -4,13 +4,11 @@ import SwiftUI
 struct MoviesSearchResultView<VM: MoviesSearchVM>: View {
     
     // MARK: - Private properties
-    
     @ObservedObject private var viewModel: VM
     private let sceneBuilder: DefaultMoviesSceneBuilder
     
     
     // MARK: - Exposed methods
-    
     init(
         viewModel: VM,
         sceneBuilder: DefaultMoviesSceneBuilder = DefaultMoviesSceneBuilder()

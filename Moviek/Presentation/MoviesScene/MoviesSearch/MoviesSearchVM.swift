@@ -15,7 +15,6 @@ protocol MoviesVMOutput {
     var items: [MovieCellVM] { get }
     var searchText: String { get set }
     var loadingState: ViewModelLoadingState { get }
-    
     var showAlert: Bool { get set }
     var errorMessage: String { get }
 }
@@ -26,17 +25,14 @@ protocol MoviesSearchVM: MoviesVMInput & MoviesVMOutput & ObservableObject {
 final class DefaultMoviesVM: MoviesSearchVM {
 
     // MARK: - Exposed properties
-    
     @Published var items: [MovieCellVM] = []
     @Published var searchText: String = ""
     @Published var loadingState: ViewModelLoadingState = .none
-
     @Published var showAlert: Bool = false
     @Published var errorMessage: String = ""
     
     
     // MARK: - Private properties
-    
     private let searchMoviesUseCase: SearchMoviesUseCase
     private var pages: [MoviesPage] = []
     private let mainQueue: DispatchQueueType
@@ -45,7 +41,6 @@ final class DefaultMoviesVM: MoviesSearchVM {
     
     
     // MARK: - Exposed methods
-    
     init(
         searchMoviesUseCase: SearchMoviesUseCase,
         mainQueue: DispatchQueueType = DispatchQueue.main
@@ -84,7 +79,6 @@ final class DefaultMoviesVM: MoviesSearchVM {
 
     
     // MARK: - Private methods
-    
     private func resetSearch(forText searchText: String) {
         pages.removeAll()
         items.removeAll()
@@ -151,7 +145,6 @@ final class DefaultMoviesVM: MoviesSearchVM {
 
 
 // MARK: - Private extensions
-
 private extension Array where Element == MoviesPage {
     var movies: [Movie] { flatMap { $0.movies } }
 }

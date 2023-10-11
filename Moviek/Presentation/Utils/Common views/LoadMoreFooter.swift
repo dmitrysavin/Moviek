@@ -2,6 +2,7 @@
 import SwiftUI
 
 struct LoadMoreFooter: View {
+    
     var body: some View {
         HStack(spacing: 20)  {
             Spacer()

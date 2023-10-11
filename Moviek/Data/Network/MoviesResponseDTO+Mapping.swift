@@ -3,7 +3,6 @@ import Foundation
 
 
 // MARK: - Data Transfer Object
-
 struct MoviesResponseDTO: Decodable {
     private enum CodingKeys: String, CodingKey {
         case page
@@ -44,7 +43,6 @@ extension MoviesResponseDTO {
 
 
 // MARK: - Mappings to Domain
-
 extension MoviesResponseDTO {
     func toDomain() -> MoviesPage {
         return .init(page: page,
@@ -75,7 +73,6 @@ extension MoviesResponseDTO.MovieDTO.GenreDTO {
 
 
 // MARK: - Private
-
 private let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd"

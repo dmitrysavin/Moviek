@@ -4,9 +4,7 @@ import Foundation
 final class MovieCellVM: ObservableObject {
     
     // MARK: - Exposed properties
-    
     @Published var posterURL: URL?
-    
     let title: String
     let posterImagePath: String?
     let releaseDate: String?
@@ -14,12 +12,10 @@ final class MovieCellVM: ObservableObject {
     
     
     // MARK: - Private properties
-    
     private let imagePathResolver: ImagePathResolver
     
     
     // MARK: - Exposed methods
-    
     init(
         movie: Movie,
         imagePathResolver: ImagePathResolver = ImagePathResolver()

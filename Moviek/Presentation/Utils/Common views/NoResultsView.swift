@@ -2,6 +2,7 @@
 import SwiftUI
 
 struct NoResultsView: View {
+    
     var body: some View {
         VStack(spacing: 20)  {
             Text("🎥")

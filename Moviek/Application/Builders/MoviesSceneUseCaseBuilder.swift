@@ -14,7 +14,6 @@ struct MoviesSceneUseCaseBuilder {
     
     
     // MARK: - Movies Search Screen
-    
     func makeSearchMoviesUseCase() -> SearchMoviesUseCase {
         let moviesRepository = makeMoviesRepository()
         let moviesQueriesRepository = makeMoviesQueriesRepository()
@@ -35,7 +34,6 @@ struct MoviesSceneUseCaseBuilder {
     
     
     // MARK: - Movies Queries View
-    
     func makeMoviesQueriesUseCase() -> MoviesQueriesUseCase {
         let repository = makeMoviesQueriesRepository()
         return DefaultMoviesQueriesUseCase(moviesQueriesRepository: repository)

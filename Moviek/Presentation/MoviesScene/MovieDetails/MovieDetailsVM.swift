@@ -4,7 +4,6 @@ import Foundation
 protocol MovieDetailsVMOutput {
     var posterURL: URL? { get }
     var imageWidth: Int { get }
-    
     var title: String { get }
     var overview: String { get }
     var posterImagePath: String? { get }
@@ -17,9 +16,7 @@ protocol MovieDetailsVM: MovieDetailsVMOutput & ObservableObject {
 final class DefaultMovieDetailsVM: MovieDetailsVM {
     
     // MARK: - Exposed properties
-
     @Published var posterURL: URL?
-    
     var title: String
     var posterImagePath: String?
     var releaseDate: String?
@@ -28,12 +25,10 @@ final class DefaultMovieDetailsVM: MovieDetailsVM {
     
     
     // MARK: - Private properties
-    
     private let imagePathResolver: ImagePathResolver
     
     
     // MARK: - Exposed methods
-    
     init(
         movie: Movie,
         imagePathResolver: ImagePathResolver = ImagePathResolver()
@@ -54,7 +49,6 @@ final class DefaultMovieDetailsVM: MovieDetailsVM {
     
     
     // MARK: - Private methods
-    
     func updatePosterURL() {
         guard let imagePath = self.posterImagePath else { return }
         
