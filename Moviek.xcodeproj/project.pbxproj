@@ -417,21 +417,21 @@
 			isa = PBXGroup;
 			children = (
 				C2C740CC2AD618BC00E04E88 /* Builders */,
-				C2FA5F542AC29F850002F85A /* DIContainers */,
-				C2FA5F592AC2A0800002F85A /* AppFlowCoordinator.swift */,
+				C2FA5F542AC29F850002F85A /* Components */,
 				C2FA5F292AC268710002F85A /* MoviekApp.swift */,
-				C27C67B02AC5437800491C7E /* AppConfiguration.swift */,
-				C2C740CA2AD5E60500E04E88 /* ImagePathResolver.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
 		};
-		C2FA5F542AC29F850002F85A /* DIContainers */ = {
+		C2FA5F542AC29F850002F85A /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				C2FA5F552AC29F9C0002F85A /* AppDIContainer.swift */,
+				C2FA5F592AC2A0800002F85A /* AppFlowCoordinator.swift */,
+				C27C67B02AC5437800491C7E /* AppConfiguration.swift */,
+				C2C740CA2AD5E60500E04E88 /* ImagePathResolver.swift */,
 			);
-			path = DIContainers;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		C2FA5F5B2AC2A2020002F85A /* Presentation */ = {
