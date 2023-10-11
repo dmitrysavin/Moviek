@@ -5,13 +5,13 @@ struct MoviesSearchResultView<VM: MoviesSearchVM>: View {
     
     // MARK: - Private properties
     @ObservedObject private var viewModel: VM
-    private let sceneBuilder: DefaultMoviesSceneBuilder
+    private let sceneBuilder: MoviesSceneBuilder
     
     
     // MARK: - Exposed methods
     init(
         viewModel: VM,
-        sceneBuilder: DefaultMoviesSceneBuilder = DefaultMoviesSceneBuilder()
+        sceneBuilder: MoviesSceneBuilder = MoviesSceneBuilder()
     ) {
         self.viewModel = viewModel
         self.sceneBuilder = sceneBuilder

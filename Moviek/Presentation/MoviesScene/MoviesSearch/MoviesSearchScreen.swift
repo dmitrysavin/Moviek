@@ -8,12 +8,13 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
     @ObservedObject private var keyboardManager = KeyboardManager()
     @State private var showAlert = false
     @State private var searchText: String = ""
-    private let sceneBuilder: DefaultMoviesSceneBuilder
+    private let sceneBuilder: MoviesSceneBuilder
     
     
     // MARK: - Exposed methods
-    init(viewModel: VM,
-         moviesSceneBuilder: DefaultMoviesSceneBuilder = DefaultMoviesSceneBuilder()
+    init(
+        viewModel: VM,
+        moviesSceneBuilder: MoviesSceneBuilder = MoviesSceneBuilder()
     ) {
         self.viewModel = viewModel
         self.sceneBuilder = moviesSceneBuilder

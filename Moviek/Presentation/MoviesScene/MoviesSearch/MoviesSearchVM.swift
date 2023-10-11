@@ -8,7 +8,7 @@ protocol MoviesVMInput {
     func didLoadNextPage()
     func movieDetailsScreen(
         forMovieIndex index: Int,
-        builder: DefaultMoviesSceneBuilder) -> MovieDetailsScreen<DefaultMovieDetailsVM>
+        builder: MoviesSceneBuilder) -> MovieDetailsScreen<DefaultMovieDetailsVM>
 }
 
 protocol MoviesVMOutput {
@@ -71,7 +71,7 @@ final class DefaultMoviesVM: MoviesSearchVM {
     
     func movieDetailsScreen(
         forMovieIndex index: Int,
-        builder: DefaultMoviesSceneBuilder) -> MovieDetailsScreen<DefaultMovieDetailsVM> {
+        builder: MoviesSceneBuilder) -> MovieDetailsScreen<DefaultMovieDetailsVM> {
         
         let movie = pages.movies[index]
         return builder.makeMovieDetailsScreen(movie: movie)

@@ -20,7 +20,7 @@ final class DefaultMoviesRepository {
 
 extension DefaultMoviesRepository: MoviesRepository {
     
-    // MARK: - Private methods
+    // MARK: - Exposed methods
     func fetchMovies(
         searchText: String,
         page: Int,

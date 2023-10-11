@@ -1,12 +1,7 @@
 
 import SwiftUI
 
-protocol MoviesSceneBuilder {
-    associatedtype MovieDetailsVMType: MovieDetailsVM
-    func makeMovieDetailsScreen(movie: Movie) -> MovieDetailsScreen<MovieDetailsVMType>
-}
-
-final class DefaultMoviesSceneBuilder: MoviesSceneBuilder {
+struct MoviesSceneBuilder {
 
     // MARK: - Exposed properties
     let useCaseBuilder: MoviesSceneUseCaseBuilder
