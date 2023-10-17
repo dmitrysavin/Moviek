@@ -1,6 +1,10 @@
 
 import Foundation
 
+protocol ResponseDecoder {
+    func decode<T: Decodable>(_ data: Data) throws -> T
+}
+
 enum HTTPMethodType: String {
     case get     = "GET"
     case head    = "HEAD"
@@ -145,5 +149,13 @@ private extension Encodable {
         let data = try JSONEncoder().encode(self)
         let jsonData = try JSONSerialization.jsonObject(with: data)
         return jsonData as? [String : Any]
+    }
+}
+
+class JSONResponseDecoder: ResponseDecoder {
+    private let jsonDecoder = JSONDecoder()
+    init() { }
+    func decode<T: Decodable>(_ data: Data) throws -> T {
+        return try jsonDecoder.decode(T.self, from: data)
     }
 }

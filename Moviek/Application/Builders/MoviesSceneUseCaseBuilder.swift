@@ -3,16 +3,6 @@ import Foundation
 
 struct MoviesSceneUseCaseBuilder {
     
-    // MARK: - Exposed properties
-    let apiDataTransferService: DataTransferService
-    
-    
-    // MARK: - Exposed methods
-    init(apiDataTransferService: DataTransferService = AppDIContainer.apiDataTransferService) {
-        self.apiDataTransferService = apiDataTransferService
-    }
-    
-    
     // MARK: - Movies Search Screen
     func makeSearchMoviesUseCase() -> SearchMoviesUseCase {
         let moviesRepository = makeMoviesRepository()

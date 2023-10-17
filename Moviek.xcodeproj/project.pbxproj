@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		C21665CA2AD3B06000F15016 /* View+HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21665C92AD3B06000F15016 /* View+HideKeyboard.swift */; };
 		C23642D02ADE1C0F003B608A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23642CF2ADE1C0F003B608A /* NetworkManager.swift */; };
-		C23642D22ADE321B003B608A /* DataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23642D12ADE321B003B608A /* DataTransferService.swift */; };
 		C27C679F2AC4D8AC00491C7E /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27C679E2AC4D8AC00491C7E /* Cancellable.swift */; };
 		C27C67A32AC4D91400491C7E /* MoviesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27C67A22AC4D91400491C7E /* MoviesRepository.swift */; };
 		C27C67A72AC4D99100491C7E /* DefaultMoviesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27C67A62AC4D99100491C7E /* DefaultMoviesRepository.swift */; };
@@ -18,10 +17,8 @@
 		C27C67AF2AC52C9800491C7E /* MoviesResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27C67AE2AC52C9800491C7E /* MoviesResponseDTO+Mapping.swift */; };
 		C27C67B12AC5437800491C7E /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27C67B02AC5437800491C7E /* AppConfiguration.swift */; };
 		C27C67B32AC543A300491C7E /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27C67B22AC543A300491C7E /* APIEndpoints.swift */; };
-		C27C67B92AC5442F00491C7E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27C67B82AC5442F00491C7E /* NetworkService.swift */; };
 		C27C67BB2AC5444D00491C7E /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27C67BA2AC5444D00491C7E /* Endpoint.swift */; };
 		C27C67BD2AC5445C00491C7E /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27C67BC2AC5445C00491C7E /* NetworkConfig.swift */; };
-		C27C67C02AC5451300491C7E /* RepositoryTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27C67BF2AC5451300491C7E /* RepositoryTask.swift */; };
 		C27C67C52AC554CB00491C7E /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27C67C42AC554CB00491C7E /* LoadingView.swift */; };
 		C2C740CB2AD5E60500E04E88 /* ImagePathResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C740CA2AD5E60500E04E88 /* ImagePathResolver.swift */; };
 		C2C740CE2AD6191700E04E88 /* MoviesSceneUseCaseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C740CD2AD6191700E04E88 /* MoviesSceneUseCaseBuilder.swift */; };
@@ -84,7 +81,6 @@
 /* Begin PBXFileReference section */
 		C21665C92AD3B06000F15016 /* View+HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+HideKeyboard.swift"; sourceTree = "<group>"; };
 		C23642CF2ADE1C0F003B608A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		C23642D12ADE321B003B608A /* DataTransferService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTransferService.swift; sourceTree = "<group>"; };
 		C27C679E2AC4D8AC00491C7E /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
 		C27C67A22AC4D91400491C7E /* MoviesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRepository.swift; sourceTree = "<group>"; };
 		C27C67A62AC4D99100491C7E /* DefaultMoviesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMoviesRepository.swift; sourceTree = "<group>"; };
@@ -93,10 +89,8 @@
 		C27C67AE2AC52C9800491C7E /* MoviesResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoviesResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
 		C27C67B02AC5437800491C7E /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		C27C67B22AC543A300491C7E /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
-		C27C67B82AC5442F00491C7E /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		C27C67BA2AC5444D00491C7E /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		C27C67BC2AC5445C00491C7E /* NetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
-		C27C67BF2AC5451300491C7E /* RepositoryTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTask.swift; sourceTree = "<group>"; };
 		C27C67C12AC5494A00491C7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C27C67C42AC554CB00491C7E /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		C2C740CA2AD5E60500E04E88 /* ImagePathResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePathResolver.swift; sourceTree = "<group>"; };
@@ -244,7 +238,6 @@
 		C27C67A52AC4D94A00491C7E /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				C27C67BF2AC5451300491C7E /* RepositoryTask.swift */,
 				C27C67A62AC4D99100491C7E /* DefaultMoviesRepository.swift */,
 				C2E613242ACE184A0082E642 /* DefaultMoviesQueriesRepository.swift */,
 			);
@@ -273,8 +266,6 @@
 		C27C67B52AC543FF00491C7E /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				C23642D12ADE321B003B608A /* DataTransferService.swift */,
-				C27C67B82AC5442F00491C7E /* NetworkService.swift */,
 				C27C67BA2AC5444D00491C7E /* Endpoint.swift */,
 				C27C67BC2AC5445C00491C7E /* NetworkConfig.swift */,
 			);
@@ -657,7 +648,6 @@
 				C2CC9AE32AC69804000490EE /* ViewModelLoadingState.swift in Sources */,
 				C2CC9AE12AC676EB000490EE /* LoadMoreFooter.swift in Sources */,
 				C2FA5F582AC29FEA0002F85A /* MoviesSceneBuilder.swift in Sources */,
-				C27C67C02AC5451300491C7E /* RepositoryTask.swift in Sources */,
 				C2FA5F5A2AC2A0800002F85A /* AppFlowCoordinator.swift in Sources */,
 				C2CC9ADF2AC66E0A000490EE /* LoadNextPageManager.swift in Sources */,
 				C27C67AD2AC52C8600491C7E /* MoviesRequestDTO+Mapping.swift in Sources */,
@@ -679,7 +669,6 @@
 				C2E613232ACE16650082E642 /* MoviesQueriesRepository.swift in Sources */,
 				C27C67B32AC543A300491C7E /* APIEndpoints.swift in Sources */,
 				C23642D02ADE1C0F003B608A /* NetworkManager.swift in Sources */,
-				C27C67B92AC5442F00491C7E /* NetworkService.swift in Sources */,
 				C2F65FCB2ACB55B500156C10 /* NoResultsView.swift in Sources */,
 				C27C679F2AC4D8AC00491C7E /* Cancellable.swift in Sources */,
 				C2FA5F6B2AC2ACF70002F85A /* MoviesSearchResultView.swift in Sources */,
@@ -690,7 +679,6 @@
 				C2FA5F692AC2A8630002F85A /* Movie.swift in Sources */,
 				C21665CA2AD3B06000F15016 /* View+HideKeyboard.swift in Sources */,
 				C2CC9AF92AC95D34000490EE /* DateFormatter+DisplayFormatter.swift in Sources */,
-				C23642D22ADE321B003B608A /* DataTransferService.swift in Sources */,
 				C27C67B12AC5437800491C7E /* AppConfiguration.swift in Sources */,
 				C2CC9AF32AC91EA4000490EE /* MovieDetailsScreen.swift in Sources */,
 				C2E6132C2ACE19140082E642 /* UserDefaultsMoviesQueriesStorage.swift in Sources */,
