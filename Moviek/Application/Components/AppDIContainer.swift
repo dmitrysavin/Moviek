@@ -4,7 +4,7 @@ import Foundation
 final class AppDIContainer {
     
     // MARK: - Network
-    static let networkManager: NetworkManager = {
+    static let networkManager: NetworkService = {
         let config = ApiDataNetworkConfig(
             baseURL: URL(string: AppConfiguration.apiBaseURL)!,
             queryParameters: [
@@ -13,6 +13,6 @@ final class AppDIContainer {
             ]
         )
 
-        return DefaultNetworkManager.init(config: config)
+        return DefaultNetworkService.init(config: config)
     }()
 }

@@ -4,11 +4,11 @@ import Foundation
 final class DefaultMoviesRepository {
     
     // MARK: - Private properties
-    private let networkManager: NetworkManager
+    private let networkManager: NetworkService
     
     
     // MARK: - Exposed methods
-    init(networkManager: NetworkManager = AppDIContainer.networkManager) {
+    init(networkManager: NetworkService = AppDIContainer.networkManager) {
         self.networkManager = networkManager
     }
 }

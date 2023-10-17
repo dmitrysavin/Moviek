@@ -1,11 +1,11 @@
 
 import Foundation
 
-protocol NetworkManager {
+protocol NetworkService {
     func executeRequest<T: Decodable>(_ endpoint: Endpoint<T>) async throws -> T
 }
 
-struct DefaultNetworkManager: NetworkManager {
+struct DefaultNetworkService: NetworkService {
 
     private let config: NetworkConfigurable
 
