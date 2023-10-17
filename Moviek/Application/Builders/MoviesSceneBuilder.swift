@@ -4,7 +4,7 @@ import SwiftUI
 struct MoviesSceneBuilder {
 
     // MARK: - Exposed properties
-    let useCaseBuilder: MoviesSceneUseCaseBuilder
+    private let useCaseBuilder: MoviesSceneUseCaseBuilder
     
     
     // MARK: - Exposed methods

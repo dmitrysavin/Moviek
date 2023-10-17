@@ -19,7 +19,7 @@ final class DefaultMoviesQueriesVM: MoviesQueriesVM {
     
     
     // MARK: - Private properties
-    private let searchMoviesUseCase: MoviesQueriesUseCase
+    private let moviesQueriesUseCase: MoviesQueriesUseCase
     private let mainQueue: DispatchQueueType
     private var queriesLoadTask: Cancellable? { willSet { queriesLoadTask?.cancel() } }
     
@@ -29,14 +29,14 @@ final class DefaultMoviesQueriesVM: MoviesQueriesVM {
         searchMoviesUseCase: MoviesQueriesUseCase,
         mainQueue: DispatchQueueType = DispatchQueue.main
     ) {
-        self.searchMoviesUseCase = searchMoviesUseCase
+        self.moviesQueriesUseCase = searchMoviesUseCase
         self.mainQueue = mainQueue
     }
     
     func updateMoviesQueries() {
         let requestValue = MoviesQueriesUseCaseRequestValue(maxCount: 10)
 
-        queriesLoadTask = searchMoviesUseCase.execute(
+        queriesLoadTask = moviesQueriesUseCase.execute(
             requestValue: requestValue,
             completion: { [weak self] result in
 

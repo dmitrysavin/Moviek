@@ -35,19 +35,14 @@ final class DefaultMoviesVM: MoviesSearchVM {
     // MARK: - Private properties
     private let searchMoviesUseCase: SearchMoviesUseCase
     private var pages: [MoviesPage] = []
-    private let mainQueue: DispatchQueueType
     private let loadNextPageManager: LoadNextPageManager
     private var moviesLoadTask: Cancellable? { willSet { moviesLoadTask?.cancel() } }
     
     
     // MARK: - Exposed methods
-    init(
-        searchMoviesUseCase: SearchMoviesUseCase,
-        mainQueue: DispatchQueueType = DispatchQueue.main
-    ) {
+    init(searchMoviesUseCase: SearchMoviesUseCase) {
         self.searchMoviesUseCase = searchMoviesUseCase
         self.loadNextPageManager = LoadNextPageManager(currentPage: 0, totalPageCount: 1)
-        self.mainQueue = mainQueue
     }
     
     func didSearch(text searchText: String) {
@@ -93,26 +88,27 @@ final class DefaultMoviesVM: MoviesSearchVM {
         forText searchText: String,
         loadingState: ViewModelLoadingState
     ) {
+
         self.loadingState = loadingState
         self.searchText = searchText
-        
+
         let requestValue = SearchMoviesUseCaseRequestValue(
             searchText: searchText,
             page: loadNextPageManager.nextPage
         )
-        
-        moviesLoadTask = searchMoviesUseCase.execute(
-            requestValue: requestValue,
-            completion: { [weak self] result in
-                self?.mainQueue.async {
-                    switch result {
-                    case .success(let moviesPage):
-                        self?.appendPage(moviesPage)
-                    case .failure(let error):
-                        self?.handle(error: error)
-                    }
+
+        Task {
+            do {
+                let moviesPage = try await searchMoviesUseCase.execute(requestValue: requestValue)
+                DispatchQueue.main.async { [weak self] in
+                    self?.appendPage(moviesPage)
                 }
-        })
+            } catch {
+                DispatchQueue.main.async { [weak self] in
+                    self?.handle(error: error)
+                }
+            }
+        }
     }
 
     private func appendPage(_ moviesPage: MoviesPage) {

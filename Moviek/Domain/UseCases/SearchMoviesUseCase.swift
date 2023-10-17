@@ -7,10 +7,7 @@ struct SearchMoviesUseCaseRequestValue {
 }
 
 protocol SearchMoviesUseCase {
-    func execute(
-        requestValue: SearchMoviesUseCaseRequestValue,
-        completion: @escaping (Result<MoviesPage, Error>) -> Void
-    ) -> Cancellable?
+    func execute(requestValue: SearchMoviesUseCaseRequestValue) async throws -> MoviesPage
 }
 
 final class DefaultSearchMoviesUseCase: SearchMoviesUseCase {
@@ -29,25 +26,20 @@ final class DefaultSearchMoviesUseCase: SearchMoviesUseCase {
         self.moviesQueriesRepository = moviesQueriesRepository
     }
     
-    func execute(
-        requestValue: SearchMoviesUseCaseRequestValue,
-        completion: @escaping (Result<MoviesPage, Error>) -> Void
-    ) -> Cancellable? {
-    
+    func execute(requestValue: SearchMoviesUseCaseRequestValue) async throws -> MoviesPage {
         let movieQuery = MovieQuery(query: requestValue.searchText)
         
-        return moviesRepository.fetchMovies(
-            searchText: requestValue.searchText,
-            page: requestValue.page
-        ) { moviesPageResult in
+        do {
+            let moviesPage = try await moviesRepository.fetchMovies(
+                searchText: requestValue.searchText,
+                page: requestValue.page)
             
-            if case .success = moviesPageResult {
-                self.moviesQueriesRepository.saveRecentQuery(query: movieQuery) { movieQueryResult in
-                    completion(moviesPageResult)
-                }
-            } else {
-                completion(moviesPageResult)
+            self.moviesQueriesRepository.saveRecentQuery(query: movieQuery) { movieQueryResult in
             }
+            
+            return moviesPage
+        } catch {
+            throw error
         }
     }
 }

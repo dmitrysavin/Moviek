@@ -4,47 +4,28 @@ import Foundation
 final class DefaultMoviesRepository {
     
     // MARK: - Private properties
-    private let dataTransferService: DataTransferService
-    private let backgroundQueue: DataTransferDispatchQueue
-
+    private let networkManager: NetworkManager
+    
     
     // MARK: - Exposed methods
-    init(
-        dataTransferService: DataTransferService,
-        backgroundQueue: DataTransferDispatchQueue = DispatchQueue.global(qos: .userInitiated)
-    ) {
-        self.dataTransferService = dataTransferService
-        self.backgroundQueue = backgroundQueue
+    init(networkManager: NetworkManager = AppDIContainer.networkManager) {
+        self.networkManager = networkManager
     }
 }
+
 
 extension DefaultMoviesRepository: MoviesRepository {
     
     // MARK: - Exposed methods
     func fetchMovies(
         searchText: String,
-        page: Int,
-        completion: @escaping (Result<MoviesPage, Error>) -> Void
-    ) -> Cancellable? {
-        
-        let requestDTO = MoviesRequestDTO(query: searchText, page: page)
-        let task = RepositoryTask()
-
-            guard !task.isCancelled else { return nil }
-
+        page: Int) async throws -> MoviesPage {
+            
+            let requestDTO = MoviesRequestDTO(query: searchText, page: page)
             let endpoint = APIEndpoints.getMovies(with: requestDTO)
-            task.networkTask = dataTransferService.request(
-                with: endpoint,
-                on: backgroundQueue
-            ) { result in
-                switch result {
-                case .success(let responseDTO):
-                    completion(.success(responseDTO.toDomain()))
-                case .failure(let error):
-                    completion(.failure(error))
-                }
-            }
+            let responseDTO2 = try await networkManager.executeRequest(endpoint)
+            let moviesPage = responseDTO2.toDomain()
         
-        return task
-    }
+            return moviesPage
+        }
 }

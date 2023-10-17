@@ -24,7 +24,7 @@ struct MoviesSceneUseCaseBuilder {
     }
     
     func makeMoviesRepository() -> MoviesRepository {
-        DefaultMoviesRepository(dataTransferService: apiDataTransferService)
+        DefaultMoviesRepository()
     }
 
     func makeMoviesQueriesRepository() -> MoviesQueriesRepository {
