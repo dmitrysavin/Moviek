@@ -292,6 +292,7 @@
 				C21665CB2AD3BF4700F15016 /* Managers */,
 				C21665C82AD3B03800F15016 /* Extensions */,
 				C2CC9AE22AC69804000490EE /* ViewModelLoadingState.swift */,
+				C2C740CA2AD5E60500E04E88 /* ImagePathResolver.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -426,7 +427,6 @@
 				C2FA5F552AC29F9C0002F85A /* AppDIContainer.swift */,
 				C2FA5F592AC2A0800002F85A /* AppFlowCoordinator.swift */,
 				C27C67B02AC5437800491C7E /* AppConfiguration.swift */,
-				C2C740CA2AD5E60500E04E88 /* ImagePathResolver.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
