@@ -1,7 +1,7 @@
 
 import Foundation
 
-class LoadNextPageManager {
+class LoadNextPageHelper {
 
     // MARK: - Exposed properties
     var hasNextPage: Bool {

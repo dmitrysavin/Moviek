@@ -35,14 +35,14 @@ final class DefaultMoviesVM: MoviesSearchVM {
     // MARK: - Private properties
     private let searchMoviesUseCase: SearchMoviesUseCase
     private var pages: [MoviesPage] = []
-    private let loadNextPageManager: LoadNextPageManager
+    private let loadNextPageManager: LoadNextPageHelper
     private var moviesLoadTask: Cancellable? { willSet { moviesLoadTask?.cancel() } }
     
     
     // MARK: - Exposed methods
     init(searchMoviesUseCase: SearchMoviesUseCase) {
         self.searchMoviesUseCase = searchMoviesUseCase
-        self.loadNextPageManager = LoadNextPageManager(currentPage: 0, totalPageCount: 1)
+        self.loadNextPageManager = LoadNextPageHelper(currentPage: 0, totalPageCount: 1)
     }
     
     func didSearch(text searchText: String) {
