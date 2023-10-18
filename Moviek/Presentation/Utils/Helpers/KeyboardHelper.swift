@@ -2,7 +2,7 @@
 import Combine
 import SwiftUI
 
-class KeyboardManager: ObservableObject {
+class KeyboardHelper: ObservableObject {
     
     // MARK: - Exposed properties
     @Published var isKeyboardVisible: Bool = false

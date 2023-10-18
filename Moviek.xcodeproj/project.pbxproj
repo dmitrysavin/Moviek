@@ -33,7 +33,7 @@
 		C2CC9AF32AC91EA4000490EE /* MovieDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC9AF22AC91EA4000490EE /* MovieDetailsScreen.swift */; };
 		C2CC9AF72AC91F35000490EE /* MovieDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC9AF62AC91F35000490EE /* MovieDetailsVM.swift */; };
 		C2CC9AF92AC95D34000490EE /* DateFormatter+DisplayFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC9AF82AC95D34000490EE /* DateFormatter+DisplayFormatter.swift */; };
-		C2E6131D2ACE074D0082E642 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E6131C2ACE074D0082E642 /* KeyboardManager.swift */; };
+		C2E6131D2ACE074D0082E642 /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E6131C2ACE074D0082E642 /* KeyboardHelper.swift */; };
 		C2E6131F2ACE14DA0082E642 /* MovieQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E6131E2ACE14DA0082E642 /* MovieQuery.swift */; };
 		C2E613212ACE15010082E642 /* MoviesQueriesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E613202ACE15010082E642 /* MoviesQueriesUseCase.swift */; };
 		C2E613232ACE16650082E642 /* MoviesQueriesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E613222ACE16650082E642 /* MoviesQueriesRepository.swift */; };
@@ -106,7 +106,7 @@
 		C2CC9AF22AC91EA4000490EE /* MovieDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsScreen.swift; sourceTree = "<group>"; };
 		C2CC9AF62AC91F35000490EE /* MovieDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsVM.swift; sourceTree = "<group>"; };
 		C2CC9AF82AC95D34000490EE /* DateFormatter+DisplayFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+DisplayFormatter.swift"; sourceTree = "<group>"; };
-		C2E6131C2ACE074D0082E642 /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
+		C2E6131C2ACE074D0082E642 /* KeyboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
 		C2E6131E2ACE14DA0082E642 /* MovieQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieQuery.swift; sourceTree = "<group>"; };
 		C2E613202ACE15010082E642 /* MoviesQueriesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesQueriesUseCase.swift; sourceTree = "<group>"; };
 		C2E613222ACE16650082E642 /* MoviesQueriesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesQueriesRepository.swift; sourceTree = "<group>"; };
@@ -173,13 +173,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		C21665CB2AD3BF4700F15016 /* Managers */ = {
+		C21665CB2AD3BF4700F15016 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				C2CC9ADE2AC66E0A000490EE /* LoadNextPageHelper.swift */,
-				C2E6131C2ACE074D0082E642 /* KeyboardManager.swift */,
+				C2E6131C2ACE074D0082E642 /* KeyboardHelper.swift */,
+				C2C740CA2AD5E60500E04E88 /* ImagePathResolver.swift */,
 			);
-			path = Managers;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		C21665CC2AD3BF6900F15016 /* Common views */ = {
@@ -289,10 +290,9 @@
 			isa = PBXGroup;
 			children = (
 				C21665CC2AD3BF6900F15016 /* Common views */,
-				C21665CB2AD3BF4700F15016 /* Managers */,
+				C21665CB2AD3BF4700F15016 /* Helpers */,
 				C21665C82AD3B03800F15016 /* Extensions */,
 				C2CC9AE22AC69804000490EE /* ViewModelLoadingState.swift */,
-				C2C740CA2AD5E60500E04E88 /* ImagePathResolver.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -636,7 +636,7 @@
 			files = (
 				C27C67A32AC4D91400491C7E /* MoviesRepository.swift in Sources */,
 				C2E6131F2ACE14DA0082E642 /* MovieQuery.swift in Sources */,
-				C2E6131D2ACE074D0082E642 /* KeyboardManager.swift in Sources */,
+				C2E6131D2ACE074D0082E642 /* KeyboardHelper.swift in Sources */,
 				C2C740CB2AD5E60500E04E88 /* ImagePathResolver.swift in Sources */,
 				C2F65FD42ACB712600156C10 /* MoviesQueryCellVM.swift in Sources */,
 				C23642D92ADF9CEB003B608A /* MovieQueryEntity.swift in Sources */,

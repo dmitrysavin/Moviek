@@ -5,7 +5,7 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
     
     // MARK: - Private properties
     @ObservedObject private var viewModel: VM
-    @ObservedObject private var keyboardManager = KeyboardManager()
+    @ObservedObject private var keyboardManager = KeyboardHelper()
     @State private var showAlert = false
     @State private var searchText: String = ""
     private let sceneBuilder: MoviesSceneBuilder
