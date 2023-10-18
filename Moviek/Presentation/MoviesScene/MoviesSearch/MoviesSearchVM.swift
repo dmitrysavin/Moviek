@@ -88,7 +88,6 @@ final class DefaultMoviesVM: MoviesSearchVM {
         forText searchText: String,
         loadingState: ViewModelLoadingState
     ) {
-
         self.loadingState = loadingState
         self.searchText = searchText
 
@@ -101,7 +100,9 @@ final class DefaultMoviesVM: MoviesSearchVM {
             do {
                 let moviesPage = try await searchMoviesUseCase.execute(requestValue: requestValue)
                 DispatchQueue.main.async { [weak self] in
-                    self?.appendPage(moviesPage)
+                    if (requestValue.searchText == searchText) {
+                        self?.appendPage(moviesPage)
+                    }
                 }
             } catch {
                 DispatchQueue.main.async { [weak self] in

@@ -15,4 +15,12 @@ final class AppDIContainer {
 
         return DefaultNetworkService.init(config: config)
     }()
+    
+    static let swiftDataStorage: SwiftDataStorage = {
+        do {
+            return try SwiftDataStorage()
+        } catch {
+            fatalError("Failed to initialize SwiftDataStorage: \(error)")
+        }
+    }()
 }

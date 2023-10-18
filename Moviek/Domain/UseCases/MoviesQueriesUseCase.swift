@@ -7,9 +7,8 @@ struct MoviesQueriesUseCaseRequestValue {
 
 protocol MoviesQueriesUseCase {
     func execute(
-        requestValue: MoviesQueriesUseCaseRequestValue,
-        completion: @escaping (Result<[MovieQuery], Error>) -> Void
-    ) -> Cancellable?
+        requestValue: MoviesQueriesUseCaseRequestValue
+    ) async throws -> [MovieQuery]
 }
 
 struct DefaultMoviesQueriesUseCase: MoviesQueriesUseCase {
@@ -24,15 +23,8 @@ struct DefaultMoviesQueriesUseCase: MoviesQueriesUseCase {
     }
     
     func execute(
-        requestValue: MoviesQueriesUseCaseRequestValue,
-        completion: @escaping (Result<[MovieQuery], Error>) -> Void
-    ) -> Cancellable? {
-
-        moviesQueriesRepository.fetchRecentsQueries(
-            maxCount: requestValue.maxCount,
-            completion: completion
-        )
-        
-        return nil
+        requestValue: MoviesQueriesUseCaseRequestValue
+    ) async throws -> [MovieQuery] {
+        return try await moviesQueriesRepository.fetchRecentsQueries(maxCount: requestValue.maxCount)
     }
 }

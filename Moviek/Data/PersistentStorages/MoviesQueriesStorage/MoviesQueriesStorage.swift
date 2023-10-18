@@ -2,13 +2,7 @@
 import Foundation
 
 protocol MoviesQueriesStorage {
-    func fetchRecentsQueries(
-        maxCount: Int,
-        completion: @escaping (Result<[MovieQuery], Error>) -> Void
-    )
+    func saveRecentQuery(movieQuery: MovieQuery) async throws -> MovieQuery
     
-    func saveRecentQuery(
-        query: MovieQuery,
-        completion: @escaping (Result<MovieQuery, Error>) -> Void
-    )
+    func fetchRecentsQueries(maxCount: Int) async throws -> [MovieQuery]
 }

@@ -2,7 +2,7 @@
 import Foundation
 
 struct MoviesSceneUseCaseBuilder {
-    
+        
     // MARK: - Movies Search Screen
     func makeSearchMoviesUseCase() -> SearchMoviesUseCase {
         let moviesRepository = makeMoviesRepository()
@@ -18,7 +18,7 @@ struct MoviesSceneUseCaseBuilder {
     }
 
     func makeMoviesQueriesRepository() -> MoviesQueriesRepository {
-        let storage = UserDefaultsMoviesQueriesStorage(maxStorageLimit: 10)
+        let storage = SwiftDataMoviesQueriesStorage(maxStorageLimit: 10)
         return DefaultMoviesQueriesRepository(moviesQueriesPersistentStorage: storage)
     }
     

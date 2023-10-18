@@ -34,8 +34,7 @@ final class DefaultSearchMoviesUseCase: SearchMoviesUseCase {
                 searchText: requestValue.searchText,
                 page: requestValue.page)
             
-            self.moviesQueriesRepository.saveRecentQuery(query: movieQuery) { movieQueryResult in
-            }
+            _ = try? await self.moviesQueriesRepository.saveRecentQuery(query: movieQuery)
             
             return moviesPage
         } catch {

@@ -36,20 +36,15 @@ final class DefaultMoviesQueriesVM: MoviesQueriesVM {
     func updateMoviesQueries() {
         let requestValue = MoviesQueriesUseCaseRequestValue(maxCount: 10)
 
-        queriesLoadTask = moviesQueriesUseCase.execute(
-            requestValue: requestValue,
-            completion: { [weak self] result in
-
-                self?.mainQueue.async {
-                    switch result {
-                    case .success(let items):
-                        self?.items = items
-                            .map { $0.query }
-                            .map(MoviesQueryCellVM.init)
-                    case .failure:
-                        break
-                    }
+        Task {
+            do {
+                let movieQueries = try await moviesQueriesUseCase.execute(requestValue: requestValue)
+                DispatchQueue.main.async { [weak self] in
+                    self?.items = movieQueries
+                        .map { $0.query }
+                        .map(MoviesQueryCellVM.init)
                 }
-        })
+            }
+        }
     }
 }

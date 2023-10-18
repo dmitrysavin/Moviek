@@ -1,38 +1,22 @@
 
 import Foundation
 
-final class DefaultMoviesQueriesRepository {
+final class DefaultMoviesQueriesRepository: MoviesQueriesRepository {
     
     // MARK: - Private properties
-    private var moviesQueriesPersistentStorage: MoviesQueriesStorage
+    private var moviesQueriesStorage: MoviesQueriesStorage
     
     
     // MARK: - Exposed methods
     init(moviesQueriesPersistentStorage: MoviesQueriesStorage) {
-        self.moviesQueriesPersistentStorage = moviesQueriesPersistentStorage
-    }
-}
-
-extension DefaultMoviesQueriesRepository: MoviesQueriesRepository {
-    
-    // MARK: - Exposed methods
-    func fetchRecentsQueries(
-        maxCount: Int,
-        completion: @escaping (Result<[MovieQuery], Error>) -> Void
-    ) {
-        return moviesQueriesPersistentStorage.fetchRecentsQueries(
-            maxCount: maxCount,
-            completion: completion
-        )
+        self.moviesQueriesStorage = moviesQueriesPersistentStorage
     }
     
-    func saveRecentQuery(
-        query: MovieQuery,
-        completion: @escaping (Result<MovieQuery, Error>) -> Void
-    ) {
-        moviesQueriesPersistentStorage.saveRecentQuery(
-            query: query,
-            completion: completion
-        )
+    func saveRecentQuery(query: MovieQuery) async throws -> MovieQuery {
+        return try await moviesQueriesStorage.saveRecentQuery(movieQuery: query)
+    }
+    
+    func fetchRecentsQueries(maxCount: Int) async throws -> [MovieQuery] {
+        return try await moviesQueriesStorage.fetchRecentsQueries(maxCount: maxCount)
     }
 }
