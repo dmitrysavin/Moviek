@@ -43,7 +43,7 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
             }
             .navigationTitle("Movie Search")
             .searchable(text: $searchText)
-            .onChange(of: viewModel.showAlert) { newValue in
+            .onChange(of: viewModel.showAlert) { newValue, _ in
                 if newValue {
                     showAlert = true
                 }
@@ -51,7 +51,7 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
             .onSubmit(of: .search) {
                 viewModel.didSearch(text: searchText)
             }
-            .onChange(of: searchText) { newText in
+            .onChange(of: searchText) { newText, _ in
                 if newText.isEmpty {
                     viewModel.didCancelSearch()
                 }
