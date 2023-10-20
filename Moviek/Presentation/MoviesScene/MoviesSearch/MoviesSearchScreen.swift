@@ -31,7 +31,9 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
 
                     sceneBuilder.makeMoviesQueriesView { selectedQueryVM in
                         searchText = selectedQueryVM.query
-                        viewModel.didSearch(text: searchText)
+                        Task {
+                            await viewModel.didSearch(text: searchText)
+                        }
                         hideKeyboard()
                     }
                 } else {
@@ -41,19 +43,24 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
                     )
                 }
             }
-            .navigationTitle("Movie Search")
-            .searchable(text: $searchText)
+            .navigationTitle("Find your movie")
+            .searchable(text: $searchText, prompt: "Search...")
+            .disableAutocorrection(true)
             .onChange(of: viewModel.showAlert) { newValue, _ in
                 if newValue {
                     showAlert = true
                 }
             }
             .onSubmit(of: .search) {
-                viewModel.didSearch(text: searchText)
+                Task {
+                    await viewModel.didSearch(text: searchText)
+                }
             }
-            .onChange(of: searchText) { newText, _ in
-                if newText.isEmpty {
-                    viewModel.didCancelSearch()
+            .onChange(of: searchText) { oldValue, newValue in
+                if oldValue.isEmpty == false && newValue.isEmpty {
+                    Task {
+                        await viewModel.didCancelSearch()
+                    }
                 }
             }
             .alert(isPresented: $showAlert) {

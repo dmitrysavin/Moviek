@@ -3,9 +3,9 @@ import Foundation
 import SwiftUI
 
 protocol MoviesVMInput {
-    func didSearch(text searchText: String)
-    func didCancelSearch()
-    func didLoadNextPage()
+    func didSearch(text searchText: String) async
+    func didCancelSearch() async
+    func didLoadNextPage() async
     func movieDetailsScreen(
         forMovieIndex index: Int,
         builder: MoviesSceneBuilder) -> MovieDetailsScreen<DefaultMovieDetailsVM>
@@ -36,7 +36,6 @@ final class DefaultMoviesVM: MoviesSearchVM {
     private let searchMoviesUseCase: SearchMoviesUseCase
     private var pages: [MoviesPage] = []
     private let loadNextPageManager: LoadNextPageHelper
-    private var moviesLoadTask: Cancellable? { willSet { moviesLoadTask?.cancel() } }
     
     
     // MARK: - Exposed methods
@@ -45,22 +44,21 @@ final class DefaultMoviesVM: MoviesSearchVM {
         self.loadNextPageManager = LoadNextPageHelper(currentPage: 0, totalPageCount: 1)
     }
     
-    func didSearch(text searchText: String) {
-        resetSearch(forText: searchText)
+    func didSearch(text searchText: String) async {
+        await resetSearch(forText: searchText)
     }
     
-    func didCancelSearch() {
-        moviesLoadTask?.cancel()
-        resetSearch(forText: "")
+    @MainActor func didCancelSearch() async {
+        await resetSearch(forText: "")
         loadingState = .none
     }
     
-    func didLoadNextPage() {
+    @MainActor func didLoadNextPage() async {
         guard loadNextPageManager.hasNextPage,
                 loadingState == .none
         else { return }
         
-        searchMovies(forText: searchText,
+        await searchMovies(forText: searchText,
                      loadingState: .nextPage)
     }
     
@@ -74,20 +72,20 @@ final class DefaultMoviesVM: MoviesSearchVM {
 
     
     // MARK: - Private methods
-    private func resetSearch(forText searchText: String) {
+    @MainActor private func resetSearch(forText searchText: String) async {
         pages.removeAll()
         items.removeAll()
         loadNextPageManager.update(currentPage: 0, totalPageCount: 1)
         
         guard !searchText.isEmpty else { return }
 
-        searchMovies(forText: searchText, loadingState: .firstPage)
+        await searchMovies(forText: searchText, loadingState: .firstPage)
     }
     
-    private func searchMovies(
+    @MainActor private func searchMovies(
         forText searchText: String,
         loadingState: ViewModelLoadingState
-    ) {
+    ) async {
         self.loadingState = loadingState
         self.searchText = searchText
 
@@ -99,15 +97,11 @@ final class DefaultMoviesVM: MoviesSearchVM {
         Task {
             do {
                 let moviesPage = try await searchMoviesUseCase.execute(requestValue: requestValue)
-                DispatchQueue.main.async { [weak self] in
                     if (requestValue.searchText == searchText) {
-                        self?.appendPage(moviesPage)
+                        appendPage(moviesPage)
                     }
-                }
             } catch {
-                DispatchQueue.main.async { [weak self] in
-                    self?.handle(error: error)
-                }
+                handle(error: error)
             }
         }
     }

@@ -30,7 +30,9 @@ struct MoviesSearchResultView<VM: MoviesSearchVM>: View {
                             MovieСell(viewModel: vm)
                                 .onAppear() {
                                     if index == viewModel.items.count - 1 {
-                                        viewModel.didLoadNextPage()
+                                        Task {
+                                            await viewModel.didLoadNextPage()
+                                        }
                                     }
                                 }
                         }

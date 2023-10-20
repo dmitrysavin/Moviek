@@ -25,6 +25,7 @@ struct DefaultMoviesQueriesUseCase: MoviesQueriesUseCase {
     func execute(
         requestValue: MoviesQueriesUseCaseRequestValue
     ) async throws -> [MovieQuery] {
-        return try await moviesQueriesRepository.fetchRecentsQueries(maxCount: requestValue.maxCount)
+        let movieQueries = try await moviesQueriesRepository.fetchRecentsQueries(maxCount: requestValue.maxCount)
+        return movieQueries.reversed()
     }
 }

@@ -1,36 +1,46 @@
-//
-//  MoviekTests.swift
-//  MoviekTests
-//
-//  Created by Dmytro Savin on 26.09.2023.
-//
 
 import XCTest
 @testable import Moviek
 
-final class MoviekTests: XCTestCase {
+class DefaultMoviesVMTests: XCTestCase {
+    
+    func testDidSearch() async {
+        let movies = [Movie.mock, Movie.mock, Movie.mock, Movie.mock, Movie.mock]
+        let mockPage = MoviesPage(page: 1, totalPages: 1, movies: movies)
+        let searchUseCase = MockSearchMoviesUseCase(mockMoviesPage: mockPage)
+        let moviesVM = DefaultMoviesVM(searchMoviesUseCase: searchUseCase)
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+        let expectation = XCTestExpectation(description: "Search movies")
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        print("1")
+        Task {
+            print("3")
+            await moviesVM.didSearch(text: "Action")
+            print("4")
+            expectation.fulfill()
+            print("5")
         }
+
+        print("2")
+        // Wait for the expectation to be fulfilled, with a timeout of 5 seconds (adjust as needed)
+        wait(for: [expectation], timeout: 5)
+        
+        print("6")
+        print("items = \(moviesVM.items.count)")
+        XCTAssertGreaterThan(moviesVM.items.count, 0)
+    }
+}
+
+
+class MockSearchMoviesUseCase: SearchMoviesUseCase {
+
+    let mockMoviesPage: MoviesPage
+
+    init(mockMoviesPage: MoviesPage) {
+        self.mockMoviesPage = mockMoviesPage
     }
 
+    func execute(requestValue: SearchMoviesUseCaseRequestValue) async throws -> MoviesPage {
+        return mockMoviesPage
+    }
 }

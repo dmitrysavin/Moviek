@@ -20,31 +20,24 @@ final class DefaultMoviesQueriesVM: MoviesQueriesVM {
     
     // MARK: - Private properties
     private let moviesQueriesUseCase: MoviesQueriesUseCase
-    private let mainQueue: DispatchQueueType
-    private var queriesLoadTask: Cancellable? { willSet { queriesLoadTask?.cancel() } }
     
     
     // MARK: - Exposed methods
-    init(
-        searchMoviesUseCase: MoviesQueriesUseCase,
-        mainQueue: DispatchQueueType = DispatchQueue.main
-    ) {
+    init(searchMoviesUseCase: MoviesQueriesUseCase) {
         self.moviesQueriesUseCase = searchMoviesUseCase
-        self.mainQueue = mainQueue
     }
     
-    func updateMoviesQueries() {
+    @MainActor func updateMoviesQueries() {
         let requestValue = MoviesQueriesUseCaseRequestValue(maxCount: 10)
 
         Task {
             do {
                 let movieQueries = try await moviesQueriesUseCase.execute(requestValue: requestValue)
-                DispatchQueue.main.async { [weak self] in
-                    self?.items = movieQueries
-                        .map { $0.query }
-                        .map(MoviesQueryCellVM.init)
-                }
+                items = movieQueries
+                    .map { $0.query }
+                    .map(MoviesQueryCellVM.init)
             }
         }
     }
 }
+
