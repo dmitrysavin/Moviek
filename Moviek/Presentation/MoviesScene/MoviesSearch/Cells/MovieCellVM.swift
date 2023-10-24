@@ -42,3 +42,12 @@ final class MovieCellVM: ObservableObject {
         )
     }    
 }
+
+
+extension MovieCellVM: Equatable {
+    static func == (lhs: MovieCellVM, rhs: MovieCellVM) -> Bool {
+        return lhs.title == rhs.title &&
+        lhs.posterImagePath == rhs.posterImagePath &&
+        lhs.releaseDate == rhs.releaseDate
+    }
+}

@@ -16,7 +16,7 @@ protocol MoviesVMOutput {
     var searchText: String { get set }
     var loadingState: ViewModelLoadingState { get }
     var showAlert: Bool { get set }
-    var errorMessage: String { get }
+    var errorMessage: String? { get set }
 }
 
 protocol MoviesSearchVM: MoviesVMInput & MoviesVMOutput & ObservableObject {
@@ -29,19 +29,19 @@ final class DefaultMoviesVM: MoviesSearchVM {
     @Published var searchText: String = ""
     @Published var loadingState: ViewModelLoadingState = .none
     @Published var showAlert: Bool = false
-    @Published var errorMessage: String = ""
+    @Published var errorMessage: String?
     
     
     // MARK: - Private properties
     private let searchMoviesUseCase: SearchMoviesUseCase
     private var pages: [MoviesPage] = []
-    private let loadNextPageManager: LoadNextPageHelper
+    private let loadNextPageHelper: LoadNextPageHelper
     
     
     // MARK: - Exposed methods
     init(searchMoviesUseCase: SearchMoviesUseCase) {
         self.searchMoviesUseCase = searchMoviesUseCase
-        self.loadNextPageManager = LoadNextPageHelper(currentPage: 0, totalPageCount: 1)
+        self.loadNextPageHelper = LoadNextPageHelper(currentPage: 0, totalPageCount: 1)
     }
     
     func didSearch(text searchText: String) async {
@@ -54,12 +54,12 @@ final class DefaultMoviesVM: MoviesSearchVM {
     }
     
     @MainActor func didLoadNextPage() async {
-        guard loadNextPageManager.hasNextPage,
+        guard loadNextPageHelper.hasNextPage,
                 loadingState == .none
         else { return }
         
-        await searchMovies(forText: searchText,
-                     loadingState: .nextPage)
+        await searchMovies(forText: searchText, 
+                           loadingState: .nextPage)
     }
     
     func movieDetailsScreen(
@@ -75,39 +75,37 @@ final class DefaultMoviesVM: MoviesSearchVM {
     @MainActor private func resetSearch(forText searchText: String) async {
         pages.removeAll()
         items.removeAll()
-        loadNextPageManager.update(currentPage: 0, totalPageCount: 1)
+        loadNextPageHelper.update(currentPage: 0, totalPageCount: 1)
         
         guard !searchText.isEmpty else { return }
 
-        await searchMovies(forText: searchText, loadingState: .firstPage)
+        await searchMovies(forText: searchText, 
+                           loadingState: .firstPage)
     }
     
     @MainActor private func searchMovies(
         forText searchText: String,
         loadingState: ViewModelLoadingState
     ) async {
-        self.loadingState = loadingState
         self.searchText = searchText
 
         let requestValue = SearchMoviesUseCaseRequestValue(
             searchText: searchText,
-            page: loadNextPageManager.nextPage
+            page: loadNextPageHelper.nextPage
         )
 
-        Task {
-            do {
-                let moviesPage = try await searchMoviesUseCase.execute(requestValue: requestValue)
-                    if (requestValue.searchText == searchText) {
-                        appendPage(moviesPage)
-                    }
-            } catch {
-                handle(error: error)
-            }
+        do {
+            let moviesPage = try await searchMoviesUseCase.execute(requestValue: requestValue)
+                if (requestValue.searchText == searchText) {
+                    appendPage(moviesPage)
+                }
+        } catch {
+            handle(error: error)
         }
     }
 
     private func appendPage(_ moviesPage: MoviesPage) {
-        loadNextPageManager.update(
+        loadNextPageHelper.update(
             currentPage: moviesPage.page,
             totalPageCount: moviesPage.totalPages
         )
@@ -120,7 +118,7 @@ final class DefaultMoviesVM: MoviesSearchVM {
             MovieCellVM(movie: $0)
         }
         
-        if moviesPage.movies.count > 0 {
+        if items.count > 0 {
             loadingState = .none
         } else {
             loadingState = .emptyPage
