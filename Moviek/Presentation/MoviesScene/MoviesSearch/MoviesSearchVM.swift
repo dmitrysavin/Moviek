@@ -22,6 +22,7 @@ protocol MoviesVMOutput {
 protocol MoviesSearchVM: MoviesVMInput & MoviesVMOutput & ObservableObject {
 }
 
+
 final class DefaultMoviesVM: MoviesSearchVM {
 
     // MARK: - Exposed properties

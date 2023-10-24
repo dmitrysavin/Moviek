@@ -15,7 +15,9 @@ struct MoviesQueriesView<VM: MoviesQueriesVM>: View {
     init(viewModel: VM, onTap: ((MoviesQueryCellVM) -> Void)? = nil) {
         self.viewModel = viewModel
         self.onTap = onTap
-        viewModel.updateMoviesQueries()
+        Task {
+            await viewModel.updateMoviesQueries()
+        }
     }
     
     var body: some View {
