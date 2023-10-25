@@ -23,7 +23,7 @@ class MoviesSearchVMTests: XCTestCase {
     }()
     
     func test_whenSearchMoviesUseCaseRetrievesEmptyPage_thenViewModelIsEmpty() async {
-        // given
+        // Given
         let searchMoviesUseCaseMock = SearchMoviesUseCaseMock()
         searchMoviesUseCaseMock._execute = { requestValue in
             XCTAssertEqual(requestValue.page, 1)
@@ -32,10 +32,10 @@ class MoviesSearchVMTests: XCTestCase {
         
         let viewModel = DefaultMoviesVM(searchMoviesUseCase: searchMoviesUseCaseMock)
         
-        // when
+        // When
         await viewModel.didSearch(text: "query")
         
-        // then
+        // Then
         XCTAssertEqual(viewModel.loadingState, .emptyPage)
         XCTAssertTrue(viewModel.items.isEmpty)
         XCTAssertEqual(searchMoviesUseCaseMock.executeCallCount, 1)
@@ -43,7 +43,7 @@ class MoviesSearchVMTests: XCTestCase {
     }
     
     func test_whenSearchMoviesUseCaseRetrievesFirstPage_thenViewModelContainsOnlyFirstPage() async {
-        // given
+        // Given
         let searchMoviesUseCaseMock = SearchMoviesUseCaseMock()
         searchMoviesUseCaseMock._execute = { requestValue in
             XCTAssertEqual(requestValue.page, 1)
@@ -52,10 +52,10 @@ class MoviesSearchVMTests: XCTestCase {
         
         let viewModel = DefaultMoviesVM(searchMoviesUseCase: searchMoviesUseCaseMock)
         
-        // when
+        // When
         await viewModel.didSearch(text: "query")
         
-        // then
+        // Then
         let expectedItems = moviesPages[0]
             .movies
             .map { MovieCellVM(movie: $0) }
@@ -66,7 +66,7 @@ class MoviesSearchVMTests: XCTestCase {
     }
     
     func test_whenSearchMoviesUseCaseRetrievesFirstAndSecondPage_thenViewModelContainsTwoPages() async {
-        // given
+        // Given
         let searchMoviesUseCaseMock = SearchMoviesUseCaseMock()
         searchMoviesUseCaseMock._execute = { requestValue in
             XCTAssertEqual(requestValue.page, 1)
@@ -75,7 +75,7 @@ class MoviesSearchVMTests: XCTestCase {
         
         let viewModel = DefaultMoviesVM(searchMoviesUseCase: searchMoviesUseCaseMock)
         
-        // when
+        // When
         await viewModel.didSearch(text: "query")
         XCTAssertEqual(searchMoviesUseCaseMock.executeCallCount, 1)
         
@@ -86,7 +86,7 @@ class MoviesSearchVMTests: XCTestCase {
         
         await viewModel.didLoadNextPage()
         
-        // then
+        // Then
         let expectedItems = moviesPages
             .flatMap { $0.movies }
             .map { MovieCellVM(movie: $0) }
@@ -97,7 +97,7 @@ class MoviesSearchVMTests: XCTestCase {
     }
     
     func test_whenSearchMoviesUseCaseReturnsError_thenViewModelContainsError() async {
-        // given
+        // Given
         let searchMoviesUseCaseMock = SearchMoviesUseCaseMock()
         searchMoviesUseCaseMock._execute = { requestValue in
             XCTAssertEqual(requestValue.page, 1)
@@ -106,10 +106,10 @@ class MoviesSearchVMTests: XCTestCase {
         
         let viewModel = DefaultMoviesVM(searchMoviesUseCase: searchMoviesUseCaseMock)
         
-        // when
+        // When
         await viewModel.didSearch(text: "query")
         
-        // then
+        // Then
         XCTAssertNotNil(viewModel.errorMessage)
         XCTAssertTrue(viewModel.showAlert)
         XCTAssertTrue(viewModel.items.isEmpty)
@@ -119,7 +119,7 @@ class MoviesSearchVMTests: XCTestCase {
     }
     
     func test_whenLastPage_thenSearchMoviesUseCaseNotExecuted() async {
-        // given
+        // Given
         let searchMoviesUseCaseMock = SearchMoviesUseCaseMock()
         searchMoviesUseCaseMock._execute = { requestValue in
             XCTAssertEqual(requestValue.page, 1)
@@ -128,7 +128,7 @@ class MoviesSearchVMTests: XCTestCase {
         
         let viewModel = DefaultMoviesVM(searchMoviesUseCase: searchMoviesUseCaseMock)
         
-        // when
+        // When
         await viewModel.didSearch(text: "query")
         XCTAssertEqual(searchMoviesUseCaseMock.executeCallCount, 1)
         
@@ -140,14 +140,14 @@ class MoviesSearchVMTests: XCTestCase {
         await viewModel.didLoadNextPage()
         await viewModel.didLoadNextPage()
         
-        // then
+        // Then
         XCTAssertEqual(viewModel.loadingState, .none)
         XCTAssertEqual(searchMoviesUseCaseMock.executeCallCount, 2)
         addTeardownBlock { [weak viewModel] in XCTAssertNil(viewModel) }
     }
     
     func test_whenSearchMoviesUseCaseRetrievesFirstPageAndViewModelDidCancel_thenViewModelIsEmpty() async {
-        // given
+        // Given
         let searchMoviesUseCaseMock = SearchMoviesUseCaseMock()
         searchMoviesUseCaseMock._execute = { requestValue in
             XCTAssertEqual(requestValue.page, 1)
@@ -156,11 +156,11 @@ class MoviesSearchVMTests: XCTestCase {
         
         let viewModel = DefaultMoviesVM(searchMoviesUseCase: searchMoviesUseCaseMock)
         
-        // when
+        // When
         await viewModel.didSearch(text: "query")
         await viewModel.didCancelSearch()
         
-        // then
+        // Then
         XCTAssertEqual(viewModel.loadingState, .none)
         XCTAssertTrue(viewModel.items.isEmpty)
         XCTAssertEqual(searchMoviesUseCaseMock.executeCallCount, 1)

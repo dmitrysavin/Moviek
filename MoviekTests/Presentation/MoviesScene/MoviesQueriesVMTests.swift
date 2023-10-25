@@ -16,7 +16,7 @@ class MoviesQueriesVMTests: XCTestCase {
                         MovieQuery(query: "query5")]
 
     func test_whenMoviesQueriesUseCaseUpdatesQueries_thenShowTheseQueries() async {
-        // given
+        // Given
         let useCase = MoviesQueriesUseCaseMock()
         useCase._execute = { requestValue in
             return self.moviesQueries
@@ -27,16 +27,16 @@ class MoviesQueriesVMTests: XCTestCase {
             numberOfQueriesToShow: 3
         )
 
-        // when
+        // When
         await viewModel.updateMoviesQueries()
         
-        // then
+        // Then
         XCTAssertEqual(viewModel.items.map { $0.query }, moviesQueries.map { $0.query })
         XCTAssertEqual(useCase.executeCallCount, 1)
     }
     
     func test_whenFetchRecentMovieQueriesUseCaseReturnsError_thenDontShowAnyQuery() async {
-        // given
+        // Given
         let useCase = MoviesQueriesUseCaseMock()
         useCase._execute = { requestValue in
             throw MoviesQueriesVMError.testError
@@ -47,10 +47,10 @@ class MoviesQueriesVMTests: XCTestCase {
             numberOfQueriesToShow: 3
         )
 
-        // when
+        // When
         await viewModel.updateMoviesQueries()
         
-        // then
+        // Then
         XCTAssertTrue(viewModel.items.isEmpty)
         XCTAssertEqual(useCase.executeCallCount, 1)
     }

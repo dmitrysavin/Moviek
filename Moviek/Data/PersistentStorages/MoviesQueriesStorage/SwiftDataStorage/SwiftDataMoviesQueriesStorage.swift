@@ -24,7 +24,7 @@ final class SwiftDataMoviesQueriesStorage: MoviesQueriesStorage {
             return movieQuery
         }
 
-        try await removeQueries(limit: maxStorageLimit-1)
+        try await removeQueries(limit: maxStorageLimit - 1)
         
         let queryEntity = MovieQueryEntity(query: movieQuery.query)
         swiftDataStorage.save(queryEntity)

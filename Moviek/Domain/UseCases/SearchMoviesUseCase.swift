@@ -27,14 +27,13 @@ final class DefaultSearchMoviesUseCase: SearchMoviesUseCase {
     }
     
     func execute(requestValue: SearchMoviesUseCaseRequestValue) async throws -> MoviesPage {
-        let movieQuery = MovieQuery(query: requestValue.searchText)
-        
         do {
             let moviesPage = try await moviesRepository.fetchMovies(
                 searchText: requestValue.searchText,
                 page: requestValue.page)
-            
-            _ = try? await self.moviesQueriesRepository.saveRecentQuery(query: movieQuery)
+
+            let movieQuery = MovieQuery(query: requestValue.searchText)
+            _ = try await self.moviesQueriesRepository.saveRecentQuery(query: movieQuery)
             
             return moviesPage
         } catch {
