@@ -6,7 +6,7 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
     // MARK: - Private properties
     @ObservedObject private var viewModel: VM
     @ObservedObject private var keyboardManager = KeyboardHelper()
-    @State private var showAlert = false
+    @State private var showAlert = false // Needed to fix .alert(isPresented:) Xcode bug.
     @State private var searchText: String = ""
     private let sceneBuilder: MoviesSceneBuilder
     
@@ -65,9 +65,10 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
             }
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("Error"),
-                      message: Text(viewModel.errorMessage),
+                      message: Text(viewModel.errorMessage ?? "Some error"),
                       dismissButton: .default(Text("OK")) {
                         vm.showAlert = false
+                        vm.errorMessage = nil
                         showAlert = false
                       })
             }
