@@ -89,6 +89,7 @@ final class DefaultMoviesVM: MoviesSearchVM {
         loadingState: ViewModelLoadingState
     ) async {
         self.searchText = searchText
+        self.loadingState = loadingState
 
         let requestValue = SearchMoviesUseCaseRequestValue(
             searchText: searchText,
