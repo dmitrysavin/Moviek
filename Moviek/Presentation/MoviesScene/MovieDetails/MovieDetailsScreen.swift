@@ -44,5 +44,6 @@ struct MovieDetailsScreen<VM: MovieDetailsVM>: View {
             .padding()
             .navigationBarTitle("", displayMode: .inline)
         }
+        .accessibilityIdentifier(AccessibilityIdentifier.movieDetailsScreen)
     }
 }
