@@ -6,8 +6,8 @@ final class MoviekUITests: XCTestCase {
 
     private var app: XCUIApplication!
     
-    private var screen: MoviesSearchScreenViews {
-        MoviesSearchScreenViews(app: app)
+    private var screen: MoviesSearchScreenElements {
+        MoviesSearchScreenElements(app: app)
     }
     
     override func setUp() {

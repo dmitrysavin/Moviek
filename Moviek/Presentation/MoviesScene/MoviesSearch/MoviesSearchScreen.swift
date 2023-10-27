@@ -43,10 +43,10 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
                     )
                 }
             }
-            .navigationTitle("Find your movie")
-            .searchable(text: $searchText, prompt: "Search...")
+            .navigationTitle(Text("find_your_movie"))
+            .searchable(text: $searchText, prompt: Text("search..."))
             .disableAutocorrection(true)
-            .onChange(of: viewModel.showAlert) { newValue, _ in
+            .onChange(of: viewModel.showAlert) { oldValue, newValue in
                 if newValue {
                     showAlert = true
                 }
@@ -64,9 +64,10 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
                 }
             }
             .alert(isPresented: $showAlert) {
-                Alert(title: Text("Error"),
-                      message: Text(viewModel.errorMessage ?? "Some error"),
-                      dismissButton: .default(Text("OK")) {
+                let errorText = LocalizedStringKey(viewModel.errorMessage ?? "some_error")
+                return Alert(title: Text("error"),
+                      message: Text(errorText),
+                      dismissButton: .default(Text("ok_all_capital")) {
                         vm.showAlert = false
                         vm.errorMessage = nil
                         showAlert = false

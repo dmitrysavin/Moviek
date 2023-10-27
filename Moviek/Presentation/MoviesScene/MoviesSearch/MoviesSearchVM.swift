@@ -128,7 +128,7 @@ final class DefaultMoviesVM: MoviesSearchVM {
     }
 
     private func handle(error: Error) {
-        errorMessage = "Failed to load movies."
+        errorMessage = "failed_to_load_movies"
         showAlert = true
         loadingState = .none
     }

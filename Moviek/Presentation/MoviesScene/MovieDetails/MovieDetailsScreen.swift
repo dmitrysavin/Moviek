@@ -32,7 +32,7 @@ struct MovieDetailsScreen<VM: MovieDetailsVM>: View {
                     .bold()
                 
                 if let releaseDate = viewModel.releaseDate {
-                    Text("Released: \(releaseDate)")
+                    Text("released: \(releaseDate)")
                         .font(.headline)
                 }
                 

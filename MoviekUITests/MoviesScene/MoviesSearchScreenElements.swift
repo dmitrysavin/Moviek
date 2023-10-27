@@ -1,15 +1,15 @@
 
 import XCTest
 
-class MoviesSearchScreenViews {
+class MoviesSearchScreenElements {
 
     // MARK: - Exposed properties
     var searchField: XCUIElement {
-        app.navigationBars["Find your movie"].searchFields["Search..."]
+        return app.navigationBars[localizedString("find_your_movie")].searchFields[localizedString("search...")]
     }
     
     var keyboardSearchButton: XCUIElement {
-        app.keyboards.buttons["Search"]
+        app.keyboards.buttons[localizedString("search")]
     }
     
     var firstListCell: XCUIElement {
