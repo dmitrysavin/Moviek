@@ -23,9 +23,9 @@ extension DefaultMoviesRepository: MoviesRepository {
             
             let requestDTO = MoviesRequestDTO(query: searchText, page: page)
             let endpoint = APIEndpoints.getMovies(with: requestDTO)
-            let responseDTO2 = try await networkManager.executeRequest(endpoint)
-            let moviesPage = responseDTO2.toDomain()
-        
+            let responseDTO = try await networkManager.executeRequest(endpoint)
+            let moviesPage = responseDTO.toDomain()
+
             return moviesPage
         }
 }
