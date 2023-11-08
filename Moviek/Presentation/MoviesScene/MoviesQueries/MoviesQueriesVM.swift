@@ -34,10 +34,8 @@ final class DefaultMoviesQueriesVM: MoviesQueriesVM {
     }
     
     @MainActor func updateMoviesQueries() async {
-        let requestValue = MoviesQueriesUseCaseRequestValue(maxCount: numberOfQueriesToShow)
-
         do {
-            let movieQueries = try await moviesQueriesUseCase.execute(requestValue: requestValue)
+            let movieQueries = try await moviesQueriesUseCase.execute(maxCount: numberOfQueriesToShow)
             items = movieQueries
                 .map { $0.query }
                 .map(MoviesQueryCellVM.init)

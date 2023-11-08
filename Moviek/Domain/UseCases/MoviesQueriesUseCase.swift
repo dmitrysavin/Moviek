@@ -1,13 +1,9 @@
 
 import Foundation
 
-struct MoviesQueriesUseCaseRequestValue {
-    let maxCount: Int
-}
-
 protocol MoviesQueriesUseCase {
     func execute(
-        requestValue: MoviesQueriesUseCaseRequestValue
+        maxCount: Int
     ) async throws -> [MovieQuery]
 }
 
@@ -23,9 +19,9 @@ struct DefaultMoviesQueriesUseCase: MoviesQueriesUseCase {
     }
     
     func execute(
-        requestValue: MoviesQueriesUseCaseRequestValue
+        maxCount: Int
     ) async throws -> [MovieQuery] {
-        let movieQueries = try await moviesQueriesRepository.fetchRecentsQueries(maxCount: requestValue.maxCount)
+        let movieQueries = try await moviesQueriesRepository.fetchRecentsQueries(maxCount: maxCount)
         return movieQueries.reversed()
     }
 }
