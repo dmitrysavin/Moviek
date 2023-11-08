@@ -38,8 +38,7 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
                     }
                 } else {
                     MoviesSearchResultView(
-                        viewModel: viewModel,
-                        sceneBuilder: sceneBuilder
+                        viewModel: viewModel
                     )
                 }
             }
