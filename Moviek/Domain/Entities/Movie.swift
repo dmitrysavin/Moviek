@@ -21,16 +21,3 @@ struct MoviesPage: Equatable {
     let totalPages: Int
     let movies: [Movie]
 }
-
-extension Movie {
-    static var mock: Movie {
-        return Movie(
-            id: "12345",
-            title: "Star Wars",
-            genre: .scienceFiction,
-            posterPath: "/path/to/starwars.jpg",
-            overview: "A long time ago in a galaxy far, far away...",
-            releaseDate: Date(timeIntervalSince1970: 31536000) // Represents a date in 1971
-        )
-    }
-}
