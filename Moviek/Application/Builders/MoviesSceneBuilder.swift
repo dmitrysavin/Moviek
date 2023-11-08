@@ -21,10 +21,17 @@ struct MoviesSceneBuilder {
     }
     
     
+    // MARK: - Movies Search Result View
+    func makeMoviesSearchResultView(viewModel: DefaultMoviesVM) -> MoviesSearchResultView<DefaultMoviesVM> {
+        MoviesSearchResultView(
+            viewModel: viewModel
+        )
+    }
+
+    
     // MARK: - Moviey Details Screen
-    func makeMovieDetailsScreen(movie: Movie) -> MovieDetailsScreen<DefaultMovieDetailsVM> {
-        let vm = DefaultMovieDetailsVM(movie: movie)
-        return MovieDetailsScreen(viewModel: vm)
+    func makeMovieDetailsScreen(viewModel: DefaultMovieDetailsVM) -> MovieDetailsScreen<DefaultMovieDetailsVM> {
+        MovieDetailsScreen(viewModel: viewModel)
     }
     
     

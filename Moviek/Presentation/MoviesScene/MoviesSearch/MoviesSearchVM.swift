@@ -6,9 +6,6 @@ protocol MoviesVMInput {
     func didSearch(text searchText: String) async
     func didCancelSearch() async
     func didLoadNextPage() async
-    func movieDetailsScreen(
-        forMovieIndex index: Int,
-        builder: MoviesSceneBuilder) -> MovieDetailsScreen<DefaultMovieDetailsVM>
 }
 
 protocol MoviesVMOutput {
@@ -17,6 +14,8 @@ protocol MoviesVMOutput {
     var loadingState: ViewModelLoadingState { get }
     var showAlert: Bool { get set }
     var errorMessage: String? { get set }
+    
+    func movieDetailsVM(forIndex index: Int) -> DefaultMovieDetailsVM
 }
 
 protocol MoviesSearchVM: MoviesVMInput & MoviesVMOutput & ObservableObject {
@@ -63,14 +62,12 @@ final class DefaultMoviesVM: MoviesSearchVM {
                            loadingState: .nextPage)
     }
     
-    func movieDetailsScreen(
-        forMovieIndex index: Int,
-        builder: MoviesSceneBuilder) -> MovieDetailsScreen<DefaultMovieDetailsVM> {
-        
+    func movieDetailsVM(forIndex index: Int) -> DefaultMovieDetailsVM {
         let movie = pages.movies[index]
-        return builder.makeMovieDetailsScreen(movie: movie)
+        let vm = DefaultMovieDetailsVM(movie: movie)
+        return vm
     }
-
+    
     
     // MARK: - Private methods
     @MainActor private func resetSearch(forText searchText: String) async {

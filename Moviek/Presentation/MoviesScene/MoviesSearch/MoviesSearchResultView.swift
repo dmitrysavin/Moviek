@@ -23,8 +23,8 @@ struct MoviesSearchResultView<VM: MoviesSearchVM>: View {
                 ForEach(viewModel.items.indices, id: \.self) { index in
                     if index < viewModel.items.count { // Validate the index before accessing
                         NavigationLink {
-                            viewModel.movieDetailsScreen(forMovieIndex: index,
-                                                         builder: sceneBuilder)
+                            let movieDetailsVM = viewModel.movieDetailsVM(forIndex: index)
+                            sceneBuilder.makeMovieDetailsScreen(viewModel: movieDetailsVM)
                         } label: {
                             let vm = viewModel.items[index]
                             MovieСell(viewModel: vm)
