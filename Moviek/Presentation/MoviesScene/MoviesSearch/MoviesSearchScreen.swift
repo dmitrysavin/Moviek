@@ -29,8 +29,8 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
                     searchText.isEmpty &&
                     viewModel.loadingState == .none {
 
-                    sceneBuilder.makeMoviesQueriesView { selectedQueryVM in
-                        searchText = selectedQueryVM.query
+                    sceneBuilder.makeMoviesQueriesView { query in
+                        searchText = query
                         Task {
                             await viewModel.didSearch(text: searchText)
                         }

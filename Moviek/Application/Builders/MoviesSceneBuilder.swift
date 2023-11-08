@@ -29,7 +29,7 @@ struct MoviesSceneBuilder {
     
     
     // MARK: - Movies Queries View
-    func makeMoviesQueriesView(onTap: @escaping (MoviesQueryCellVM) -> Void) -> some View {
+    func makeMoviesQueriesView(onTap: @escaping (String) -> Void) -> some View {
         let useCase = useCaseBuilder.makeMoviesQueriesUseCase()
         let vm = DefaultMoviesQueriesVM(searchMoviesUseCase: useCase)
         return MoviesQueriesView(viewModel: vm, onTap: onTap)

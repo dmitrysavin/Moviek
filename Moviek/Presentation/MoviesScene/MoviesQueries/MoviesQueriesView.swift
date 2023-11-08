@@ -8,11 +8,11 @@ struct MoviesQueriesView<VM: MoviesQueriesVM>: View {
     
     
     // MARK: - Exposed properties
-    var onTap: ((MoviesQueryCellVM) -> Void)? = nil
+    var onTap: ((String) -> Void)? = nil
     
     
     // MARK: - Exposed methods
-    init(viewModel: VM, onTap: ((MoviesQueryCellVM) -> Void)? = nil) {
+    init(viewModel: VM, onTap: ((String) -> Void)? = nil) {
         self.viewModel = viewModel
         self.onTap = onTap
         Task {
@@ -24,8 +24,8 @@ struct MoviesQueriesView<VM: MoviesQueriesVM>: View {
         List {
             ForEach(viewModel.items.indices, id: \.self) { index in
                 if index < viewModel.items.count {
-                    let moviesQueryCellVM = viewModel.items[index]
-                    MoviesQueryCell(viewModel: moviesQueryCellVM) { selectedQueryVM in
+                    let String = viewModel.items[index]
+                    MoviesQueryCell(viewModel: String) { selectedQueryVM in
                         onTap?(selectedQueryVM)
                     }
                 }

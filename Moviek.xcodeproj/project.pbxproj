@@ -51,7 +51,6 @@
 		C2F65FCB2ACB55B500156C10 /* NoResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F65FCA2ACB55B500156C10 /* NoResultsView.swift */; };
 		C2F65FD02ACB6E8100156C10 /* MoviesQueriesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F65FCF2ACB6E8100156C10 /* MoviesQueriesVM.swift */; };
 		C2F65FD22ACB6E8B00156C10 /* MoviesQueriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F65FD12ACB6E8B00156C10 /* MoviesQueriesView.swift */; };
-		C2F65FD42ACB712600156C10 /* MoviesQueryCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F65FD32ACB712600156C10 /* MoviesQueryCellVM.swift */; };
 		C2F65FD72ACB714F00156C10 /* MoviesQueryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F65FD62ACB714F00156C10 /* MoviesQueryCell.swift */; };
 		C2FA5F2A2AC268710002F85A /* MoviekApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FA5F292AC268710002F85A /* MoviekApp.swift */; };
 		C2FA5F2E2AC268720002F85A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2FA5F2D2AC268720002F85A /* Assets.xcassets */; };
@@ -131,7 +130,6 @@
 		C2F65FCA2ACB55B500156C10 /* NoResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultsView.swift; sourceTree = "<group>"; };
 		C2F65FCF2ACB6E8100156C10 /* MoviesQueriesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesQueriesVM.swift; sourceTree = "<group>"; };
 		C2F65FD12ACB6E8B00156C10 /* MoviesQueriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesQueriesView.swift; sourceTree = "<group>"; };
-		C2F65FD32ACB712600156C10 /* MoviesQueryCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesQueryCellVM.swift; sourceTree = "<group>"; };
 		C2F65FD62ACB714F00156C10 /* MoviesQueryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesQueryCell.swift; sourceTree = "<group>"; };
 		C2FA5F262AC268710002F85A /* Moviek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moviek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2FA5F292AC268710002F85A /* MoviekApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviekApp.swift; sourceTree = "<group>"; };
@@ -419,7 +417,6 @@
 		C2F65FD52ACB713E00156C10 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				C2F65FD32ACB712600156C10 /* MoviesQueryCellVM.swift */,
 				C2F65FD62ACB714F00156C10 /* MoviesQueryCell.swift */,
 			);
 			path = Cell;
@@ -717,7 +714,6 @@
 				C2E6131F2ACE14DA0082E642 /* MovieQuery.swift in Sources */,
 				C2E6131D2ACE074D0082E642 /* KeyboardHelper.swift in Sources */,
 				C2C740CB2AD5E60500E04E88 /* ImagePathResolver.swift in Sources */,
-				C2F65FD42ACB712600156C10 /* MoviesQueryCellVM.swift in Sources */,
 				C23642D92ADF9CEB003B608A /* MovieQueryEntity.swift in Sources */,
 				C2CC9AE32AC69804000490EE /* ViewModelLoadingState.swift in Sources */,
 				C2CC9AE12AC676EB000490EE /* LoadMoreFooter.swift in Sources */,

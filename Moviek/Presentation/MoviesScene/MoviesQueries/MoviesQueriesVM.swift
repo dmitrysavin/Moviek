@@ -6,7 +6,7 @@ protocol MoviesQueriesVMInput {
 }
 
 protocol MoviesQueriesVMOutput {
-    var items: [MoviesQueryCellVM] { get }
+    var items: [String] { get }
 }
 
 protocol MoviesQueriesVM: MoviesQueriesVMInput & MoviesQueriesVMOutput & ObservableObject {
@@ -16,7 +16,7 @@ protocol MoviesQueriesVM: MoviesQueriesVMInput & MoviesQueriesVMOutput & Observa
 final class DefaultMoviesQueriesVM: MoviesQueriesVM {
     
     // MARK: - Exposed properties
-    @Published var items: [MoviesQueryCellVM] = []
+    @Published var items: [String] = []
     
     
     // MARK: - Private properties
@@ -38,7 +38,6 @@ final class DefaultMoviesQueriesVM: MoviesQueriesVM {
             let movieQueries = try await moviesQueriesUseCase.execute(maxCount: numberOfQueriesToShow)
             items = movieQueries
                 .map { $0.query }
-                .map(MoviesQueryCellVM.init)
         } catch {}
     }
 }
