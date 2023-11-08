@@ -37,9 +37,7 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
                         hideKeyboard()
                     }
                 } else {
-                    MoviesSearchResultView(
-                        viewModel: viewModel
-                    )
+                    sceneBuilder.makeMoviesSearchResultView(viewModel: viewModel)
                 }
             }
             .navigationTitle(Text("find_your_movie"))

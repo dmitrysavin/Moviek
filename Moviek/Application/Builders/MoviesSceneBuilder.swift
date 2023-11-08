@@ -22,10 +22,12 @@ struct MoviesSceneBuilder {
     
     
     // MARK: - Movies Search Result View
-    func makeMoviesSearchResultView(viewModel: DefaultMoviesVM) -> MoviesSearchResultView<DefaultMoviesVM> {
-        MoviesSearchResultView(
-            viewModel: viewModel
-        )
+    func makeMoviesSearchResultView(viewModel: any MoviesSearchVM) -> MoviesSearchResultView<DefaultMoviesVM>? {
+        guard let defaultViewModel = viewModel as? DefaultMoviesVM else {
+            return nil
+        }
+        
+        return MoviesSearchResultView(viewModel: defaultViewModel)
     }
 
     
