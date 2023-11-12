@@ -16,7 +16,7 @@ struct MoviesQueriesView<VM: MoviesQueriesVM>: View {
         self.viewModel = viewModel
         self.onTap = onTap
         Task {
-            await viewModel.updateMoviesQueries()
+            await viewModel.fetch()
         }
     }
     

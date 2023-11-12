@@ -2,7 +2,7 @@
 import Foundation
 
 protocol MoviesQueriesVMInput {
-    func updateMoviesQueries() async
+    func fetch() async
 }
 
 protocol MoviesQueriesVMOutput {
@@ -33,7 +33,7 @@ final class DefaultMoviesQueriesVM: MoviesQueriesVM {
         self.numberOfQueriesToShow = numberOfQueriesToShow
     }
     
-    @MainActor func updateMoviesQueries() async {
+    @MainActor func fetch() async {
         do {
             let movieQueries = try await moviesQueriesUseCase.execute(maxCount: numberOfQueriesToShow)
             items = movieQueries
