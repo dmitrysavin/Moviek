@@ -15,7 +15,7 @@ protocol MoviesVMOutput {
     var showAlert: Bool { get set }
     var errorMessage: String? { get set }
     
-    func movieDetailsVM(forIndex index: Int) -> DefaultMovieDetailsVM
+    func movie(atIndex index: Int) -> Movie
 }
 
 protocol MoviesSearchVM: MoviesVMInput & MoviesVMOutput & ObservableObject {
@@ -62,10 +62,8 @@ final class DefaultMoviesVM: MoviesSearchVM {
                            loadingState: .nextPage)
     }
     
-    func movieDetailsVM(forIndex index: Int) -> DefaultMovieDetailsVM {
-        let movie = pages.movies[index]
-        let vm = DefaultMovieDetailsVM(movie: movie)
-        return vm
+    func movie(atIndex index: Int) -> Movie {
+        pages.movies[index]
     }
     
     

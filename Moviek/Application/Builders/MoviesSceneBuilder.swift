@@ -32,8 +32,9 @@ struct MoviesSceneBuilder {
 
     
     // MARK: - Moviey Details Screen
-    func makeMovieDetailsScreen(viewModel: DefaultMovieDetailsVM) -> MovieDetailsScreen<DefaultMovieDetailsVM> {
-        MovieDetailsScreen(viewModel: viewModel)
+    func makeMovieDetailsScreen(movie: Movie) -> MovieDetailsScreen<DefaultMovieDetailsVM> {
+        let viewModel = DefaultMovieDetailsVM(movie: movie)
+        return MovieDetailsScreen(viewModel: viewModel)
     }
     
     
