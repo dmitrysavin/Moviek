@@ -36,8 +36,17 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
                         }
                         hideKeyboard()
                     }
+                    
+                    
                 } else {
-                    sceneBuilder.makeMoviesSearchResultView(viewModel: viewModel)
+                    sceneBuilder.makeMoviesSearchResultView(
+                        movies: vm.movies,
+                        loadingState: vm.loadingState,
+                        loadNextPageClosure: {
+                            Task {
+                                await viewModel.didLoadNextPage()
+                            }
+                        })
                 }
             }
             .navigationTitle(Text("find_your_movie"))

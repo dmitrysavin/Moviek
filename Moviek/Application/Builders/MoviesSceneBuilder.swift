@@ -22,15 +22,18 @@ struct MoviesSceneBuilder {
     
     
     // MARK: - Movies Search Result View
-    func makeMoviesSearchResultView(viewModel: any MoviesSearchVM) -> MoviesSearchResultView<DefaultMoviesVM>? {
-        guard let defaultViewModel = viewModel as? DefaultMoviesVM else {
-            return nil
-        }
-        
-        return MoviesSearchResultView(viewModel: defaultViewModel)
+    func makeMoviesSearchResultView(
+        movies: [Movie],
+        loadingState: ViewModelLoadingState,
+        loadNextPageClosure: @escaping () -> Void
+    ) -> MoviesSearchResultView {
+        let vm = MoviesSearchResultVM(movies: movies, loadingState: loadingState)
+        var view = MoviesSearchResultView(viewModel: vm)
+        view.loadNextPageClosure = loadNextPageClosure
+        return view
     }
 
-    
+
     // MARK: - Moviey Details Screen
     func makeMovieDetailsScreen(movie: Movie) -> MovieDetailsScreen<DefaultMovieDetailsVM> {
         let viewModel = DefaultMovieDetailsVM(movie: movie)

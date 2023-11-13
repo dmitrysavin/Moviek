@@ -1,16 +1,20 @@
 
 import SwiftUI
 
-struct MoviesSearchResultView<VM: MoviesSearchVM>: View {
+struct MoviesSearchResultView: View {
+    
+    // MARK: - Exposed properties
+    var loadNextPageClosure:  (() -> Void)? = nil
+
     
     // MARK: - Private properties
-    @ObservedObject private var viewModel: VM
+    private var viewModel: MoviesSearchResultVM
     private let sceneBuilder: MoviesSceneBuilder
     
     
     // MARK: - Exposed methods
     init(
-        viewModel: VM,
+        viewModel: MoviesSearchResultVM,
         sceneBuilder: MoviesSceneBuilder = MoviesSceneBuilder()
     ) {
         self.viewModel = viewModel
@@ -30,9 +34,7 @@ struct MoviesSearchResultView<VM: MoviesSearchVM>: View {
                             MovieСell(viewModel: vm)
                                 .onAppear() {
                                     if index == viewModel.items.count - 1 {
-                                        Task {
-                                            await viewModel.didLoadNextPage()
-                                        }
+                                        loadNextPageClosure?()
                                     }
                                 }
                         }

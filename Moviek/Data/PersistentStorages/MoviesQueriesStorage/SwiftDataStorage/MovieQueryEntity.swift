@@ -4,6 +4,7 @@ import SwiftData
 
 @Model
 class MovieQueryEntity {
+    @Attribute(.unique) var id: UUID = UUID()
     let query: String
 
     init(query: String) {

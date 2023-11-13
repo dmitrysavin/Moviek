@@ -9,13 +9,11 @@ protocol MoviesVMInput {
 }
 
 protocol MoviesVMOutput {
-    var items: [MovieCellVM] { get }
+    var movies: [Movie] { get }
     var searchText: String { get set }
     var loadingState: ViewModelLoadingState { get }
     var showAlert: Bool { get set }
     var errorMessage: String? { get set }
-    
-    func movie(atIndex index: Int) -> Movie
 }
 
 protocol MoviesSearchVM: MoviesVMInput & MoviesVMOutput & ObservableObject {
@@ -25,12 +23,14 @@ protocol MoviesSearchVM: MoviesVMInput & MoviesVMOutput & ObservableObject {
 final class DefaultMoviesVM: MoviesSearchVM {
 
     // MARK: - Exposed properties
-    @Published var items: [MovieCellVM] = []
-    @Published var searchText: String = ""
     @Published var loadingState: ViewModelLoadingState = .none
     @Published var showAlert: Bool = false
-    @Published var errorMessage: String?
-    
+
+    var searchText: String = ""
+    var errorMessage: String?
+    var movies: [Movie] {
+        pages.movies
+    }
     
     // MARK: - Private properties
     private let searchMoviesUseCase: SearchMoviesUseCase
@@ -62,15 +62,10 @@ final class DefaultMoviesVM: MoviesSearchVM {
                            loadingState: .nextPage)
     }
     
-    func movie(atIndex index: Int) -> Movie {
-        pages.movies[index]
-    }
-    
     
     // MARK: - Private methods
     @MainActor private func resetSearch(forText searchText: String) async {
         pages.removeAll()
-        items.removeAll()
         loadNextPageHelper.update(currentPage: 0, totalPageCount: 1)
         
         guard !searchText.isEmpty else { return }
@@ -111,11 +106,7 @@ final class DefaultMoviesVM: MoviesSearchVM {
             .filter { $0.page != moviesPage.page }
             + [moviesPage]
         
-        items = pages.movies.map {
-            MovieCellVM(movie: $0)
-        }
-        
-        if items.count > 0 {
+        if pages.movies.count > 0 {
             loadingState = .none
         } else {
             loadingState = .emptyPage

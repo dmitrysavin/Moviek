@@ -14,12 +14,11 @@ class MoviesSearchVMTests: XCTestCase {
     
     let moviesPages: [MoviesPage] = {
         let page1 = MoviesPage(page: 1, totalPages: 2, movies: [
-            Movie.stub(id: "1", title: "title1", posterPath: "/1", overview: "overview1"),
-            Movie.stub(id: "2", title: "title2", posterPath: "/2", overview: "overview2")
+            Movie.stub(), Movie.stub()
         ])
         
         let page2 = MoviesPage(page: 2, totalPages: 2, movies: [
-            Movie.stub(id: "3", title: "title3", posterPath: "/3", overview: "overview3")
+            Movie.stub()
         ])
         
         return [page1, page2]
@@ -49,7 +48,7 @@ class MoviesSearchVMTests: XCTestCase {
         await sut.didSearch(text: "q")
         
         // Then
-        XCTAssertTrue(sut.items.isEmpty, "Items property of DefaultMoviesVM should be empty as the search text doesn't match any movies.")
+        XCTAssertTrue(sut.movies.isEmpty, "Items property of DefaultMoviesVM should be empty as the search text doesn't match any movies.")
     }
     
     func testDidSearch_whenSearchTextMatchesToMovies_thenContainsItems() async {
@@ -60,13 +59,12 @@ class MoviesSearchVMTests: XCTestCase {
 
         let expectedItems = moviesPages[0]
             .movies
-            .map { MovieCellVM(movie: $0) }
         
         // When
         await sut.didSearch(text: "q")
         
         // Then
-        XCTAssertEqual(sut.items, expectedItems, "Items property of DefaultMoviesVM should contain objects as the search text matches to movies.")
+        XCTAssertEqual(sut.movies, expectedItems, "Items property of DefaultMoviesVM should contain objects as the search text matches to movies.")
     }
     
     func testDidLoadNextPage_whenSearchTextMatchesToMovies_thenContainsItems() async {
@@ -83,13 +81,12 @@ class MoviesSearchVMTests: XCTestCase {
         
         let expectedItems = moviesPages
             .flatMap { $0.movies }
-            .map { MovieCellVM(movie: $0) }
         
         // When
         await sut.didLoadNextPage()
         
         // Then
-        XCTAssertEqual(sut.items, expectedItems, "Items property of DefaultMoviesVM should contain objects as the search text matches to movies on the next page.")
+        XCTAssertEqual(sut.movies, expectedItems, "Items property of DefaultMoviesVM should contain objects as the search text matches to movies on the next page.")
     }
 }
 
