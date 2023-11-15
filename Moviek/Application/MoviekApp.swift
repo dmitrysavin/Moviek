@@ -9,5 +9,5 @@ struct MoviekApp: App {
             let appFlowCoordinator = AppFlowCoordinator()
             appFlowCoordinator.start()
         }
-    }
+    } 
 }
