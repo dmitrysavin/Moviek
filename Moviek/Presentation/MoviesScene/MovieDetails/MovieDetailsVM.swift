@@ -10,13 +10,13 @@ protocol MovieDetailsVMOutput {
     var releaseDate: String? { get }
 }
 
-protocol MovieDetailsVM: MovieDetailsVMOutput & ObservableObject {
+protocol MovieDetailsVM: MovieDetailsVMOutput {
 }
 
 final class DefaultMovieDetailsVM: MovieDetailsVM {
     
     // MARK: - Exposed properties
-    @Published var posterURL: URL?
+    var posterURL: URL?
     var title: String
     var posterImagePath: String?
     var releaseDate: String?

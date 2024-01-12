@@ -4,7 +4,7 @@ import SwiftUI
 struct MoviesQueriesView<VM: MoviesQueriesVM>: View {
     
     // MARK: - Private properties
-    @ObservedObject private var viewModel: VM
+    @StateObject private var viewModel: VM
     
     
     // MARK: - Exposed properties
@@ -13,7 +13,7 @@ struct MoviesQueriesView<VM: MoviesQueriesVM>: View {
     
     // MARK: - Exposed methods
     init(viewModel: VM, onTap: ((String) -> Void)? = nil) {
-        self.viewModel = viewModel
+        self._viewModel = StateObject(wrappedValue: viewModel)
         self.onTap = onTap
         Task {
             await viewModel.fetch()

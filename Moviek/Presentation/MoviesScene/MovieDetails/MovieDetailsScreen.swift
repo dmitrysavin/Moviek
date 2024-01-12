@@ -5,7 +5,7 @@ import Kingfisher
 struct MovieDetailsScreen<VM: MovieDetailsVM>: View {
 
     // MARK: - Private properties
-    @ObservedObject private var viewModel: VM
+    private var viewModel: VM
 
     
     // MARK: - Exposed methods

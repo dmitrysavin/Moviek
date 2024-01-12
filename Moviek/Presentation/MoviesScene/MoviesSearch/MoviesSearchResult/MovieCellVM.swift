@@ -1,10 +1,10 @@
 
 import Foundation
 
-final class MovieCellVM: ObservableObject {
+final class MovieCellVM {
     
     // MARK: - Exposed properties
-    @Published var posterURL: URL?
+    var posterURL: URL?
     let title: String
     let posterImagePath: String?
     let releaseDate: String?

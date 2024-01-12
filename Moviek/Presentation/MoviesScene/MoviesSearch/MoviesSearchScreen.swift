@@ -4,8 +4,8 @@ import SwiftUI
 struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
     
     // MARK: - Private properties
-    @ObservedObject private var viewModel: VM
-    @ObservedObject private var keyboardManager = KeyboardHelper()
+    @StateObject private var viewModel: VM
+    @StateObject private var keyboardManager = KeyboardHelper()
     @State private var showAlert = false // Needed to fix .alert(isPresented:) Xcode bug.
     @State private var searchText: String = ""
     private let sceneBuilder: MoviesSceneBuilder
@@ -16,7 +16,7 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
         viewModel: VM,
         moviesSceneBuilder: MoviesSceneBuilder = MoviesSceneBuilder()
     ) {
-        self.viewModel = viewModel
+        self._viewModel = StateObject(wrappedValue: viewModel)
         self.sceneBuilder = moviesSceneBuilder
     }
     
@@ -36,8 +36,6 @@ struct MoviesSearchScreen<VM: MoviesSearchVM>: View {
                         }
                         hideKeyboard()
                     }
-                    
-                    
                 } else {
                     sceneBuilder.makeMoviesSearchResultView(
                         movies: vm.movies,
